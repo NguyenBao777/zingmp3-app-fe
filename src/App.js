@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { AnimatePresence } from "framer-motion";
+import { Route, Routes } from "react-router-dom";
+import { Home, Upload, Dashboard, TableCategory, AddNewCategory } from "./components";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<AnimatePresence exitBeforeEnter>
+			<div className="w-screen h-screen bg-[url('./assets/images/bg-images/zma.svg')] overflow-x-hidden">
+				<Routes>
+					<Route path="/*" element={<Home />} />
+					<Route path="/upload" element={<Upload />} />
+					<Route path="/dashboard/*" element={<Dashboard />} />
+					<Route path="/dashboard/category" element={<TableCategory />} />
+					<Route path="/dashboard/category/addnew" element={<AddNewCategory />} />
+				</Routes>
+			</div>
+		</AnimatePresence>
+	);
 }
 
 export default App;
