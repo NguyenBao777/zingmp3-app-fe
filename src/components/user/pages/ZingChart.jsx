@@ -73,7 +73,7 @@ const ZingChart = () => {
     return (
         <div className="w-full">
             <h4 className="text-2xl font-bold uppercase text-white w-full">Bảng xếp hạng</h4>
-            <div className="w-full flex flex-wrap items-center justify-center gap-4 mt-4">
+            <div className="w-full flex flex-wrap justify-center gap-4 mt-4">
                 <div className="w-full md:w-[30%] bg-white/25 rounded-md p-2 flex flex-col items-center gap-2">
                     <div className="group flex items-center gap-4 w-full justify-center cursor-pointer"
                         onClick={() => handleSetPlaylist(listChartVPOP)}>
