@@ -190,7 +190,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                     <div className="w-full flex flex-col justify-center gap-2">
                         <div className="flex items-center justify-center gap-4">
                             <div className="flex items-center justify-center gap-6">
-                                <div className={`${isRandom ? "shadow-inner shadow-md shadow-pink-600" : ""}  hover:text-pink-600 cursor-pointer h-8 w-8 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear`}
+                                <div className={`${isRandom ? "shadow-inner shadow-pink-600" : ""}  hover:text-pink-600 cursor-pointer h-8 w-8 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear`}
                                     onClick={() => setIsRandom(!isRandom)}
                                 >
                                     <FaRandom className={`text-base ${isRandom ? "text-pink-600" : "text-white"}`} />
@@ -205,7 +205,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                                 </div>
                             </div>
                             {isPlay ? (
-                                <div className="shadow-inner shadow-md shadow-pink-600 cursor-pointer h-10 w-10 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear">
+                                <div className="shadow-inner shadow-pink-600 cursor-pointer h-10 w-10 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear">
                                     <BsPauseCircle className="text-pink-600 text-3xl cursor-pointer " onClick={() => dispatch({
                                         type: actionType.SET_ISPLAY,
                                         isPlay: !isPlay
@@ -248,7 +248,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                             </p>
                         </div>
                     </div>
-                    <div className="w-full hidden md:flex items-center justify-center gap-4">
+                    <div className="w-full hidden lg:flex items-center justify-center gap-4">
 
                         <div className="cursor-pointer h-8 w-8 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear">
                             <MdOutlineLocalMovies className="text-2xl text-white" />
@@ -291,7 +291,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
 
                     </div>
 
-                    <div className="flex md:hidden items-center justify-center gap-6">
+                    <div className="flex lg:hidden items-center justify-center gap-6">
                         <div className="cursor-pointer h-8 w-8 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear"
                             onClick={() => setShowOPtion(!showOption)}
                         >
@@ -299,7 +299,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                         </div>
                     </div>
                     {showOption && (
-                        <motion.div className="absolute bottom-24 right-1 bg-primary px-1 py-2 rounded-md shadow-md"
+                        <motion.div className="absolute bottom-24 right-1 bg-primary px-1 py-2 rounded-md shadow-md flex flex-col gap-4 items-center justify-center w-300 border border-white"
                             initial={{ opacity: 0.25, y: 200 }}
                             animate={{ opacity: 1, y: 1 }}
                             exit={{ opacity: 0.25, y: 200 }}

@@ -60,7 +60,7 @@ const Header = () => {
     return (
 
         <>
-            <header className="w-[calc(100%-6.8rem)] md:w-[calc(100%-14rem)] flex items-center justify-between px-2 py-1 gap-4 bg-headerColor fixed top-0 right-0 drop-shadow-md z-20">
+            <header className="w-[calc(100%-6.8rem)] md:w-[calc(100%-7.4rem)] lg:w-[calc(100%-14rem)] flex items-center justify-between px-2 py-1 gap-4 bg-headerColor fixed top-0 right-0 drop-shadow-md z-20">
                 <div className="hidden md:flex items-center justify-center gap-4">
                     <AiOutlineArrowLeft className="text-3xl cursor-pointer text-white/75 hover:text-white transition-all duration-150 ease-linear" />
                     <AiOutlineArrowRight className="text-3xl cursor-pointer text-white/75 hover:text-white transition-all duration-150 ease-linear" />

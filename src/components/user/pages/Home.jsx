@@ -1,22 +1,27 @@
-import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { Sidebar, Navbar, Header, Musicbar, Carousel, NewSong, Category, Playlist, TopOneHundred, ZingChart, UserProfile, AlbumDetail, SearchResult } from "../../../components";
 import { useStateValue } from "../../../context/StateProvider";
 
 const Home = () => {
     const [{ playlist }, dispatch] = useStateValue([]);
     const [showPlaylist, setShowPlaylist] = useState(false);
+    const navigate = useNavigate();
+    useEffect(() => {
+        navigate("/newsong", { replace: true });
+    }, []);
+
 
     return (
         <div className="w-full h-full overflow-x-hidden">
             <Sidebar />
-            <div className={`w-full ml-28 md:ml-[14rem] relative ${playlist?.length > 0 ? "mb-28" : ""}`}>
+            <div className={`w-full ml-28 lg:ml-[14rem] relative ${playlist?.length > 0 ? "mb-28" : ""}`}>
                 <Header />
-                <div className="mt-14 mr-28 md:mr-[14rem] flex flex-col items-center px-4">
+                <div className="mt-14 mr-28 lg:mr-[14rem] flex flex-col items-center px-4">
                     <Navbar />
                     <Carousel />
                     <Routes>
-                        <Route path="/*" element={<NewSong />} />
+                        <Route path="/newsong" element={<NewSong />} />
                         <Route path="/zingchart" element={<ZingChart />} />
                         <Route path="/category" element={<Category />} />
                         <Route path="/toponehundred" element={<TopOneHundred />} />

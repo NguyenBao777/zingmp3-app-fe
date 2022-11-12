@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BsFillCheckCircleFill, BsPlayCircle, BsTrash } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useStateValue } from '../../../context/StateProvider'
 import { deleteAlbum, getAllAlbums, public_server } from '../../../helpers/helperAPI';
 import NotLogin from "../../../assets/images/icons/NotLogin.png";
@@ -63,10 +63,15 @@ const UserProfile = () => {
     const [showEditForm, setShowEditForm] = useState(false);
     const [{ user }, dispatch] = useStateValue();
     const [listUserAlbums, setListUserAlbums] = useState([]);
+    const navigate = useNavigate();
     useEffect(() => {
-        getAllAlbums(user?.id).then((res) => {
-            if (res.data.success) setListUserAlbums(res.data.message);
-        });
+        if (user) {
+            getAllAlbums(user?.id).then((res) => {
+                if (res.data.success) setListUserAlbums(res.data.message);
+            });
+        } else {
+            navigate("/newsong", { replace: true });
+        }
     }, []);
 
     return (

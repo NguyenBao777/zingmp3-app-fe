@@ -73,6 +73,12 @@ export const searchSongs = async (keywords) => {
 
 	return res;
 };
+
+export const getSongByCategory = async (categoryID) => {
+	const res = await axios.get(`${baseUrl}/song/getbycategory/${categoryID}`);
+
+	return res;
+};
 /********************* Album API: ***************************/
 export const addNewAlbum = async (formData) => {
 	const res = await axios.post(`${baseUrl}/album/addnew`, formData);

@@ -10,6 +10,7 @@ import { MdOutlineEdit } from "react-icons/md";
 import LogoSmall from "../../assets/images/logo/ZingMP3smalllogo.png";
 import LogoLarge from "../../assets/images/logo/ZingMP3largerlogo.svg.png";
 import { useStateValue } from '../../context/StateProvider';
+import { activeStyles, noActiveStyles } from '../../helpers/activeStyle';
 
 
 
@@ -17,55 +18,53 @@ const Sidebar = () => {
     const [{ playlist, user }, dispatch] = useStateValue([]);
     return (
         <nav className={`flex flex-col items-center justify-between gap-2 py-2 bg-white/25 fixed top-0 bottom-0 left-0 shadow-md ${playlist?.length > 0 ? "h-[calc(100%-80px)] md:h-[calc(100%-96px)]" : "h-full"} z-0`}>
-            <Link to="/*" className="px-2 w-full items-center justify-center hidden md:flex">
+            <Link to="/*" className="px-2 w-full items-center justify-center hidden lg:flex">
                 <img src={LogoLarge} alt="" className="w-150" />
             </Link>
-            <Link to="/*" className="w-full flex justify-center items-center md:hidden">
-                <img src={LogoSmall} alt="" className="w-[45px]" />
+            <Link to="/*" className="w-full flex justify-center items-center lg:hidden">
+                <img src={LogoSmall} alt="" className="w-[80px]" />
             </Link>
             <div className="w-full h-full flex flex-1 flex-col justify-between items-start gap-2">
-                <NavLink to={`${user ? "/userprofile" : "/"}`} className="group w-full flex items-center justify-center md:justify-between gap-4 px-6 py-1 transition-all duration-150 ease-linear">
+                <NavLink to="/userprofile" className={({ isActive }) => isActive ? activeStyles : noActiveStyles}>
                     <span className="flex items-center gap-4">
-                        <BsJournalAlbum className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-2xl" />
-                        <p className="hidden md:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
+                        <BsJournalAlbum className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-4xl lg:text-2xl" />
+                        <p className="hidden lg:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
                             Cá nhân
                         </p>
                     </span>
-                    <AiOutlinePlayCircle className="hidden md:block text-white text-2xl opacity-0 group-hover:opacity-100 transition-all duration-150 ease-linear" />
+                    <AiOutlinePlayCircle className="hidden lg:block text-white text-2xl opacity-0 group-hover:opacity-100 transition-all duration-150 ease-linear" />
                 </NavLink>
 
-                <NavLink to="/" className="group w-full flex items-center justify-center md:justify-start gap-4 px-6 py-1 transition-all duration-150 ease-linear bg-gray-300/50 relative">
-                    <div className="bg-pink-600/50 h-full w-[2px] absolute left-0 top-0"></div>
-
-                    <FiDisc className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-2xl" />
-                    <p className="hidden md:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
+                <NavLink to="/newsong" className={({ isActive }) => isActive ? activeStyles : noActiveStyles}>
+                    <FiDisc className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-4xl lg:text-2xl" />
+                    <p className="hidden lg:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
                         Khám phá
                     </p>
                 </NavLink>
 
-                <NavLink to="/zingchart" className="group w-full flex items-center justify-center md:justify-between gap-4 px-6 py-1 transition-all duration-150 ease-linear">
+                <NavLink to="/zingchart" className={({ isActive }) => isActive ? activeStyles : noActiveStyles}>
                     <span className="flex items-center gap-4">
-                        <TbWaveSawTool className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-2xl" />
-                        <p className="hidden md:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
+                        <TbWaveSawTool className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-4xl lg:text-2xl" />
+                        <p className="hidden lg:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
                             #zingchart
                         </p>
                     </span>
-                    <AiOutlinePlayCircle className="hidden md:block text-white text-2xl opacity-0 group-hover:opacity-100 transition-all duration-150 ease-linear" />
+                    <AiOutlinePlayCircle className="hidden lg:block text-white text-2xl opacity-0 group-hover:opacity-100 transition-all duration-150 ease-linear" />
                 </NavLink>
 
-                <NavLink to="/" className="group w-full flex items-center justify-center md:justify-between gap-4 px-6 py-1 transition-all duration-150 ease-linear">
+                <NavLink to="/" className={({ isActive }) => isActive ? activeStyles : noActiveStyles}>
                     <span className="flex items-center gap-4">
-                        <VscRadioTower className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-2xl" />
-                        <p className="hidden md:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
+                        <VscRadioTower className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-4xl lg:text-2xl" />
+                        <p className="hidden lg:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
                             Radio <span className="bg-red-600 text-white text-[8px] rounded-md py-1 px-3">LIVE</span>
                         </p>
                     </span>
-                    <AiOutlinePlayCircle className="hidden md:block text-white text-2xl opacity-0 group-hover:opacity-100 transition-all duration-150 ease-linear" />
+                    <AiOutlinePlayCircle className="hidden lg:block text-white text-2xl opacity-0 group-hover:opacity-100 transition-all duration-150 ease-linear" />
                 </NavLink>
 
-                <NavLink to="/" className="group w-full flex items-center justify-center md:justify-start gap-4 px-6 py-1  transition-all duration-150 ease-linear">
-                    <BsNewspaper className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-2xl" />
-                    <p className="hidden md:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
+                <NavLink to="/" className={({ isActive }) => isActive ? activeStyles : noActiveStyles}>
+                    <BsNewspaper className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-4xl lg:text-2xl" />
+                    <p className="hidden lg:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
                         Theo dõi
                     </p>
                 </NavLink>
@@ -104,7 +103,7 @@ const Sidebar = () => {
                             <span className="p-2 flex items-center justify-center bg-blue-600 rounded-lg">
                                 <BsMusicNote className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-sm" />
                             </span>
-                            <p className="hidden md:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
+                            <p className="hidden lg:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
                                 Bài hát
                             </p>
                         </span>
@@ -115,7 +114,7 @@ const Sidebar = () => {
                         <span className="p-2 flex items-center justify-center bg-green-600 rounded-lg">
                             <BsMusicNoteList className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-sm" />
                         </span>
-                        <p className="hidden md:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
+                        <p className="hidden lg:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
                             Playlist
                         </p>
                     </NavLink>
@@ -124,20 +123,11 @@ const Sidebar = () => {
                         <span className="p-2 flex items-center justify-center bg-yellow-600 rounded-lg">
                             <BiTimeFive className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-sm" />
                         </span>
-                        <p className="hidden md:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
+                        <p className="hidden lg:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
                             Gần đây
                         </p>
                     </NavLink>
                 </div>
-                <div className="h-[0.25px] w-auto bg-gray-200 mx-4"></div>
-                <NavLink to="/" className="group w-full flex items-center justify-center md:justify-start gap-4 px-6 py-1 transition-all duration-150 ease-linear">
-
-                    <AiOutlinePlus className=" text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-xl font-semibold" />
-
-                    <p className="hidden md:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear uppercase">
-                        Tạo playlist mới
-                    </p>
-                </NavLink>
             </div>
 
         </nav>

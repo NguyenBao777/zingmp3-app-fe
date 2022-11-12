@@ -48,7 +48,7 @@ const AlbumDetail = () => {
 
     return (
         <div className="w-full flex flex-wrap justify-center">
-            <div className="w-full md:w-1/3 flex flex-col justify-center items-center gap-2 p-2">
+            <div className="w-full lg:w-1/3 flex flex-col justify-center items-center gap-2 p-2">
                 <div className="group rounded-md w-60 h-60 overflow-hidden cursor-pointer relative"
                     onClick={handlePlaySong}
                 >
@@ -77,7 +77,7 @@ const AlbumDetail = () => {
                     Phát toàn bộ Album
                 </button>
             </div>
-            <div className="w-full md:w-2/3 p-2 flex flex-col items-center justify-center gap-2">
+            <div className="w-full lg:w-2/3 p-2 flex flex-col items-center justify-center gap-2">
                 {listSongs.length > 0 && listSongs.map((song, i) => (
                     <SongItem song={song} index={i} key={i} />
                 ))}
