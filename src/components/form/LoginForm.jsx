@@ -62,7 +62,7 @@ const LoginForm = ({ setAlert, setShowLoginForm, setShowRegistationForm }) => {
     }
 
     return (
-        <form className="w-300 flex flex-col items-center gap-4 rounded-md shadow-md px-2 py-4 bg-headerColor"
+        <form className="w-300 flex flex-col items-center gap-4 rounded-md shadow-md px-2 py-4 bg-gradient-to-b from-primary to-headerColor"
             onSubmit={(e) => handleSubmit(e)}
         >
             <h4 className="text-white font-semibold text-lg">Đăng nhập</h4>

@@ -18,10 +18,10 @@ const Sidebar = () => {
     const [{ playlist, user }, dispatch] = useStateValue([]);
     return (
         <nav className={`flex flex-col items-center justify-between gap-2 py-2 bg-white/25 fixed top-0 bottom-0 left-0 shadow-md ${playlist?.length > 0 ? "h-[calc(100%-80px)] md:h-[calc(100%-96px)]" : "h-full"} z-0`}>
-            <Link to="/*" className="px-2 w-full items-center justify-center hidden lg:flex">
+            <Link to="/" className="px-2 w-full items-center justify-center hidden lg:flex">
                 <img src={LogoLarge} alt="" className="w-150" />
             </Link>
-            <Link to="/*" className="w-full flex justify-center items-center lg:hidden">
+            <Link to="/" className="w-full flex justify-center items-center lg:hidden">
                 <img src={LogoSmall} alt="" className="w-[80px]" />
             </Link>
             <div className="w-full h-full flex flex-1 flex-col justify-between items-start gap-2">
@@ -62,7 +62,7 @@ const Sidebar = () => {
                     <AiOutlinePlayCircle className="hidden lg:block text-white text-2xl opacity-0 group-hover:opacity-100 transition-all duration-150 ease-linear" />
                 </NavLink>
 
-                <NavLink to="/" className={({ isActive }) => isActive ? activeStyles : noActiveStyles}>
+                <NavLink to="/artists" className={({ isActive }) => isActive ? activeStyles : noActiveStyles}>
                     <BsNewspaper className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-4xl lg:text-2xl" />
                     <p className="hidden lg:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
                         Theo dõi

@@ -34,6 +34,12 @@ export const searchArtist = async (keywords) => {
 
 	return res;
 };
+
+export const getAllArtists = async () => {
+	const res = await axios.get(`${baseUrl}/user/getall`);
+
+	return res;
+};
 /********************* songs API: ***************************/
 export const addNewSong = async (formData) => {
 	const res = await axios.post(`${baseUrl}/song/addnew`, formData, {
@@ -79,6 +85,13 @@ export const getSongByCategory = async (categoryID) => {
 
 	return res;
 };
+
+export const getSongByArtistID = async (artistID) => {
+	const res = await axios.get(`${baseUrl}/song/getbyartist/${artistID}`);
+
+	return res;
+};
+
 /********************* Album API: ***************************/
 export const addNewAlbum = async (formData) => {
 	const res = await axios.post(`${baseUrl}/album/addnew`, formData);

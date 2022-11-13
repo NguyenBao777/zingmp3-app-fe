@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { BsTrash } from 'react-icons/bs';
 import { actionType } from '../../context/reducer';
 import { useStateValue } from '../../context/StateProvider';
@@ -12,7 +12,7 @@ const PlaylistItem = ({ index, song }) => {
         dispatch({
             type: actionType.SET_PLAYLIST,
             playlist: playlist.filter((item) => item?.id !== song?.id)
-        })
+        });
     }
 
     return (

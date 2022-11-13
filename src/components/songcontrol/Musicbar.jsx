@@ -167,7 +167,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                 </motion.div>
             )}
 
-            <motion.div className="fixed bottom-0 left-0 z-30 w-full bg-[url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme-player/zma.png')] bg-repeat flex flex-col justify-between gap-4 px-4 py-2 z-30 transiton-all duration-150 ease-linear"
+            <motion.div className="fixed bottom-0 left-0 z-30 w-full bg-[url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme-player/zma.png')] bg-repeat flex flex-col justify-between gap-4 px-4 py-2 z-30 transiton-all duration-150 ease-linear border-t border-green-800"
                 initial={{ opacity: 0.5, x: -1000 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0.5, x: -1000 }}

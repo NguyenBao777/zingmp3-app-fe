@@ -25,14 +25,14 @@ const SearchResult = () => {
             <h4 className="text-white font-bold text-lg uppercase">Nghệ sĩ</h4>
             <div className="flex flex-wrap items-center gap-4">
                 {listArtists.length > 0 && listArtists.map((artist, i) => (
-                    <div key={i} className="bg-white/25 hover:bg-white/50 transition-all duration-150 ease-in-out rounded-md flex gap-4 p-2 md:w-[30%] w-full">
+                    <Link to={`/artistprofile/${artist?.id}`} key={i} className="bg-white/25 hover:bg-white/50 transition-all duration-150 ease-in-out rounded-md flex flex-wrap gap-4 p-2 w-[30%]">
                         <img src={`${public_server}/users/${artist?.user_avatar}`} alt="" className="object-cover h-24 w-24 rounded-full" />
                         <div className="">
                             <p className="text-slate-400 text-sm">Nghệ sĩ</p>
                             <p className="text-white text-base font-bold">{artist?.user_name}</p>
                             <p className="text-white text-base italic"> Ngày sinh: <span className="text-slate-400">{artist?.user_birthday}</span></p>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
             <h4 className="text-white font-bold text-lg uppercase">Albums</h4>

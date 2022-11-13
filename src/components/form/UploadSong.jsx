@@ -124,7 +124,7 @@ const UploadSong = () => {
             exit={{ opacity: 0.5, x: -1000 }}
         >
             {alert !== "" && (<Alert alert={alert} />)}
-            <form encType="multipart/form-data" className="w-full flex flex-wrap justify-center bg-blue-600/25 rounded-md oveflow-hidden"
+            <form encType="multipart/form-data" className="w-full flex flex-wrap justify-center bg-gradient-to-b from-primary to-headerColor rounded-md oveflow-hidden"
                 onSubmit={(e) => handleSubmit(e)}
             >
                 <div className="w-full md:w-1/2 flex flex-col items-center justify-center gap-4 p-2 border-r border-white">

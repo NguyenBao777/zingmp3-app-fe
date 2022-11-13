@@ -60,7 +60,7 @@ const Header = () => {
     return (
 
         <>
-            <header className="w-[calc(100%-6.8rem)] md:w-[calc(100%-7.4rem)] lg:w-[calc(100%-14rem)] flex items-center justify-between px-2 py-1 gap-4 bg-headerColor fixed top-0 right-0 drop-shadow-md z-20">
+            <header className="w-[calc(100%-6.8rem)] md:w-[calc(100%-7.4rem)] lg:w-[calc(100%-13.4rem)] flex items-center justify-between px-2 py-1 gap-4 bg-headerColor fixed top-0 right-0 drop-shadow-md z-20">
                 <div className="hidden md:flex items-center justify-center gap-4">
                     <AiOutlineArrowLeft className="text-3xl cursor-pointer text-white/75 hover:text-white transition-all duration-150 ease-linear" />
                     <AiOutlineArrowRight className="text-3xl cursor-pointer text-white/75 hover:text-white transition-all duration-150 ease-linear" />
@@ -185,7 +185,7 @@ const Header = () => {
                 </div>
             </header>
             {showLoginForm && (
-                <div className="fixed top-0 left-0 bottom-0 right-0 z-20 flex items-center justify-center bg-white/25">
+                <div className="fixed top-0 left-0 bottom-0 right-0 z-40 flex items-center justify-center bg-black/75">
                     {alert !== "" && (<Alert alert={alert} />)}
 
                     <span className="absolute top-14 right-2 w-6 h-6 cursor-pointer flex items-center justify-center p-2 rounded-full bg-red-600 hover:bg-red-800 transtion-all duration-150 ease-in-out"

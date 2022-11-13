@@ -10,12 +10,12 @@ import { BsShieldCheck, BsTelephone } from "react-icons/bs";
 import { GiQueenCrown } from "react-icons/gi";
 import { Searchbar, LoginForm, RegistationForm, Alert } from "../../components";
 import { Link } from "react-router-dom";
-import LogoSmall from "../../assets/images/logo/ZingMP3smalllogo.png";
 import LogoLarge from "../../assets/images/logo/ZingMP3largerlogo.svg.png";
 import { FaTimes } from "react-icons/fa";
 import { actionType } from "../../context/reducer";
 import NotLogin from "../../assets/images/icons/NotLogin.png";
 import { useStateValue } from "../../context/StateProvider";
+import { public_server } from "../../helpers/helperAPI";
 
 const HeaderTheme = () => {
     const [{ user }, dispatch] = useStateValue();
@@ -74,7 +74,7 @@ const HeaderTheme = () => {
                     onClick={handleShowLoginForm}
                 >
                     <div className="flex items-center justify-center h-10 w-10 rounded-full overflow-hidden cursor-pointer">
-                        <img src={user?.user_avatar || NotLogin} alt="" className="object-cover w-full h-full" />
+                        <img src={user ? `${public_server}/users/${user?.user_avatar}` : NotLogin} alt="" className="object-cover w-full h-full" />
                     </div>
                     <div className={`hidden xl:block`}>
                         <p className="text-white text-base font-semibold">{user?.user_name || "Đăng nhập"}</p>

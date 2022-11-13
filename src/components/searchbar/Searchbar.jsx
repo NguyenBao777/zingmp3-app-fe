@@ -63,9 +63,9 @@ const Searchbar = () => {
                 </div>
             </div>
             {showSearchBox && searchSongResult.length > 0 && (
-                <div className="bg-primary rounded-md w-full absolute -top-1 left-0 z-10 pt-10 px-2 py-2">
+                <div className="bg-primary rounded-md w-full absolute -top-1 left-0 z-10 pt-10 px-2 py-2 overflow-hidden">
                     <h4 className="text-white mb-2">Kết quả tìm kiếm</h4>
-                    <Link to={`/searchresult/${keySearch}`} className="p-2 flex items-center gap-4 w-full hover:bg-white/25 transition-all duration-150 ease-in-out rounded-md" onClick={()=> setTimeout(()=>{setShowSearchBox(false)},500)}>
+                    <Link to={`/searchresult/${keySearch}`} className="p-2 flex items-center gap-4 w-full hover:bg-white/25 transition-all duration-150 ease-in-out rounded-md" onClick={() => setTimeout(() => { setShowSearchBox(false) }, 500)}>
                         <BsSearch className="text-base text-white" />
                         <p className="text-white text-base">{keySearch}</p>
                     </Link>
@@ -80,8 +80,8 @@ const Searchbar = () => {
                                         <img src={IconIsPlay} alt="" className="object-cover h-6 w-6 absolute bottom-1 left-1" />
                                     )}
                                 </div>
-                                <div className="flex flex-col justify-center">
-                                    <p className="text-white text-base">{song?.song_name}</p>
+                                <div className="flex flex-col justify-center w-full">
+                                    <p className="text-white text-base whitespace-nowrap">{song?.song_name}</p> {/* > 15 ? song?.song_name.slice(0, 10) + "..." : song?.song_name*/}
                                     <p className="text-sm text-slate-400">{song?.author_name}</p>
                                 </div>
                             </div>

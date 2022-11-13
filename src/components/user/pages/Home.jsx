@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Sidebar, Navbar, Header, Musicbar, Carousel, NewSong, Category, Playlist, TopOneHundred, ZingChart, UserProfile, AlbumDetail, SearchResult } from "../../../components";
+import { Sidebar, Navbar, Header, Musicbar, Carousel, NewSong, Category, Playlist, TopOneHundred, ZingChart, UserProfile, AlbumDetail, SearchResult, ArtistProfile, Artists } from "../../../components";
 import { useStateValue } from "../../../context/StateProvider";
 
 const Home = () => {
@@ -17,7 +17,7 @@ const Home = () => {
             <Sidebar />
             <div className={`w-full ml-28 lg:ml-[14rem] relative ${playlist?.length > 0 ? "mb-28" : ""}`}>
                 <Header />
-                <div className="mt-14 mr-28 lg:mr-[14rem] flex flex-col items-center px-4">
+                <div className="mt-14 mr-28 lg:mr-[14rem] flex flex-col items-center px-4 pb-2">
                     <Navbar />
                     <Carousel />
                     <Routes>
@@ -28,6 +28,8 @@ const Home = () => {
                         <Route path="/userprofile" element={<UserProfile />} />
                         <Route path="/albumdetail/:albumcode" element={<AlbumDetail />} />
                         <Route path="/searchresult/:keywords" element={<SearchResult />} />
+                        <Route path="/artistprofile/:id" element={<ArtistProfile />} />
+                        <Route path="/artists" element={<Artists />} />
                     </Routes>
                 </div>
             </div>

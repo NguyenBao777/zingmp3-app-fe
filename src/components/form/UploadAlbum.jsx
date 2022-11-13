@@ -87,7 +87,7 @@ const UploadAlbum = () => {
         >
 
             {alert !== "" && (<Alert alert={alert} />)}
-            <form encType="multipart/form-data" className="w-full md:w-1/2 flex flex-col items-center bg-blue-600/25 rounded-md  border-r border-white oveflow-hidden"
+            <form encType="multipart/form-data" className="w-full md:w-1/2 flex flex-col items-center  bg-gradient-to-b from-primary to-headerColor rounded-md oveflow-hidden"
                 onSubmit={(e) => handleSubmit(e)}
             >
                 <div className="w-full flex flex-col items-center justify-center gap-4 p-2">
