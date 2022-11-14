@@ -93,7 +93,7 @@ const Playlist = () => {
     }
 
     return (
-        <motion.div className="fixed top-0 right-0 bottom-0 z-20 bg-primary shadow-md py-2 transtion-all duration-200 ease-in-out"
+        <motion.div className="fixed top-0 right-0 bottom-0 z-20 bg-slate-600 shadow-md py-2 transtion-all duration-200 ease-in-out"
             initial={{ opacity: 0, x: 1000 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 1000 }}

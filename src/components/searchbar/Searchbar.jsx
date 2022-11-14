@@ -63,13 +63,13 @@ const Searchbar = () => {
                 </div>
             </div>
             {showSearchBox && searchSongResult.length > 0 && (
-                <div className="bg-primary rounded-md w-full absolute -top-1 left-0 z-10 pt-10 px-2 py-2 overflow-hidden">
+                <div className="bg-gradient-to-b from-primary to-headerColor rounded-md w-full absolute -top-1 left-0 z-10 pt-10 px-2 py-2 overflow-hidden">
                     <h4 className="text-white mb-2">Kết quả tìm kiếm</h4>
                     <Link to={`/searchresult/${keySearch}`} className="p-2 flex items-center gap-4 w-full hover:bg-white/25 transition-all duration-150 ease-in-out rounded-md" onClick={() => setTimeout(() => { setShowSearchBox(false) }, 500)}>
                         <BsSearch className="text-base text-white" />
                         <p className="text-white text-base">{keySearch}</p>
                     </Link>
-                    <div className="flex flex-col gap-4 ">
+                    <div className="flex flex-col gap-4 max-h-[300px] overflow-y-auto scroll-custom">
                         {searchSongResult.length > 0 && searchSongResult.map((song, i) => (
                             <div key={i} className="w-full flex items-center gap-4 cursor-pointer hover:bg-white/25 rounded-md p-2"
                                 onClick={() => handleSetPlaylist(song)}

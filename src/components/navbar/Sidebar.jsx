@@ -70,7 +70,7 @@ const Sidebar = () => {
                 </NavLink>
                 <div className="h-[0.25px] w-auto bg-gray-200 mx-4"></div>
 
-                <div className="flex flex-col justify-center gap-2 max-h-[150px] overflow-y-auto">
+                <div className="flex flex-col justify-center gap-2 max-h-[150px] overflow-y-auto scroll-custom">
                     {/* <div className="hidden md:block w-auto p-4 text-white bg-primary rounded-md mx-4">
                         <p className="text-white font-semibold text-xs w-190 mb-2">
                             Đăng nhập để khám phá playlist dành riêng cho bạn.
