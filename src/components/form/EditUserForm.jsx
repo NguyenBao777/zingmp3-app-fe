@@ -54,14 +54,14 @@ const EditUserForm = () => {
     };
 
     return (
-        <motion.form className="w-full p-2 bg-white rounded-md mt-2 md:mt-0 md:ml-2 flex flex-col gap-4"
+        <motion.form className="w-full p-2 bg-gradient-to-b from-primary to-headerColor rounded-md mt-2 md:mt-0 md:ml-2 flex flex-col gap-4"
             initial={{ opacity: 0, x: 1000 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 1000 }}
             onSubmit={(e) => handleSubmit(e)}
         >
             <div className="w-full">
-                <label htmlFor="username" className="text-black">Tên hoặc Nghệ danh:</label>
+                <label htmlFor="username" className="text-white">Tên hoặc Nghệ danh:</label>
                 <input type="text" id="username" value={userName} placeholder="Tên hoặc nghệ danh" className="w-full px-2 py-1 border-none outline-none text-black rounded-md bg-gray-300 focus-within:bg-white transition-all duration-150 ease-in-out"
                     onChange={(e) => setUserName(e.target.value)}
                 />
@@ -88,17 +88,17 @@ const EditUserForm = () => {
                 </div>
             </div>
             <div className="w-full">
-                <label htmlFor="" className="text-black">Quốc gia:</label>
+                <label htmlFor="" className="text-white">Quốc gia:</label>
                 <input type="text" value={userCountry} placeholder="Quốc gia" className="w-full px-2 py-1 border-none outline-none text-black rounded-md bg-gray-300 focus-within:bg-white transition-all duration-150 ease-in-out"
                     onChange={(e) => setUserCountry(e.target.value)}
                 />
             </div>
             <div className="w-full">
-                <label htmlFor="" className="text-black">Ngày sinh:</label>
+                <label htmlFor="" className="text-white">Ngày sinh:</label>
                 <DatePicker className="bg-gray-300 text-black p-2" selected={userBirthday} onChange={(date) => setUserBirthday(date)} />
             </div>
             <div className="w-full">
-                <label htmlFor="username" className="text-black">Tiểu sử:</label>
+                <label htmlFor="username" className="text-white">Tiểu sử:</label>
                 <textarea rows="5" type="text" id="username" value={userDesc} placeholder="Tiểu sử" className="w-full px-2 py-1 border-none outline-none text-black rounded-md bg-gray-300 focus-within:bg-white transition-all duration-150 ease-in-out"
                     onChange={(e) => setUserDesc(e.target.value)}
                 />

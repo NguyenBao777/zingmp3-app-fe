@@ -147,3 +147,28 @@ export const getAllCategory = async (limit = 0) => {
 
 	return res;
 };
+
+/********************* Post API: ***************************/
+export const addNewPost = async (formData) => {
+	const res = await axios.post(`${baseUrl}/post/addnew`, formData);
+
+	return res;
+};
+
+export const getAllPost = async (limit = 20) => {
+	const res = await axios.get(`${baseUrl}/post/getall/${limit}`);
+
+	return res;
+};
+
+export const getPostByArtist = async (artistID) => {
+	const res = await axios.get(`${baseUrl}/post/getbyartist/${artistID}`);
+
+	return res;
+};
+
+export const deletePost = async (postID) => {
+	const res = await axios.delete(`${baseUrl}/post/delete/${postID}`);
+
+	return res;
+};

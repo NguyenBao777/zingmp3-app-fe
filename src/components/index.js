@@ -12,6 +12,7 @@ export { default as SongItem } from "./songcontrol/SongItem";
 export { default as Playlist } from "./songcontrol/Playlist";
 export { default as PlaylistItem } from "./songcontrol/PlaylistItem";
 export { default as UploadSong } from "./form/UploadSong";
+export { default as PostForm } from "./form/PostForm";
 export { default as UploadAlbum } from "./form/UploadAlbum";
 export { default as EditUserForm } from "./form/EditUserForm";
 export { default as LoginForm } from "./form/LoginForm";

@@ -1,11 +1,75 @@
 import { useState, useEffect } from 'react'
-import { AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlineEdit, AiOutlinePlus } from 'react-icons/ai';
 import { BsFillCheckCircleFill, BsPlayCircle, BsTrash } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import { useStateValue } from '../../../context/StateProvider'
-import { deleteAlbum, getAllAlbums, public_server } from '../../../helpers/helperAPI';
+import { deleteAlbum, deletePost, getAllAlbums, getPostByArtist, public_server } from '../../../helpers/helperAPI';
 import NotLogin from "../../../assets/images/icons/NotLogin.png";
 import { EditUserForm } from '../../../components';
+import Masonry from 'react-masonry-css';
+
+const PostItem = ({ data, setListPosts }) => {
+    const [{ user }, dispatch] = useStateValue();
+    const [showDeleteBox, setShowDeleteBox] = useState(false);
+
+    const handleDeletePost = () => {
+        deletePost(data?.id).then((res) => {
+            setShowDeleteBox(false);
+            getPostByArtist(user?.id).then((res) => {
+                if (res.data.success) setListPosts(res.data.message);
+            });
+        });
+    }
+
+    return (
+        <div className="flex flex-col gap-2 rounded-md bg-slate-400/25 p-2 hover:bg-slate-400/75 transition-all duration-150 ease-in-out">
+            <div className="flex items-center gap-4">
+                <img src={`${public_server}/users/${user?.user_avatar}`} alt="" className="object-cover h-12 w-12 rounded-full" />
+                <div className="flex flex-col gap-2">
+                    <p className="text-white text-base font-semibold">{user?.user_name}</p>
+                    <p className="text-slate-300 text-xs">{data?.created_at}</p>
+                </div>
+            </div>
+            <p className="text-white text-base">
+                {data?.post_content}
+            </p>
+            {data?.post_image && (
+                <img src={`${public_server}/posts/${data?.post_image}`} alt="" className="object-cover w-full rounded-md" />
+            )}
+            <div className="flex items-center gap-4 relative">
+                <button className="flex items-center justify-center gap-2 px-2 py-1 bg-red-600 hover:bg-red-800 transition-all duration-150 ease-in-out rounded-md"
+                    onClick={() => setShowDeleteBox(!showDeleteBox)}
+                >
+                    <BsTrash className="text-white text-2xl" />
+                    <p className="text-white text-base">Xóa</p>
+                </button>
+
+                <button className="flex items-center justify-center gap-2 px-2 py-1 bg-green-600 hover:bg-green-800 transition-all duration-150 ease-in-out rounded-md">
+                    <AiOutlineEdit className="text-white text-2xl" />
+                    <p className="text-white text-base">Sửa</p>
+                </button>
+
+                {showDeleteBox && (
+                    <div className="absolute top-0 left-0 rounded-md bg-gradient-to-b from-primary to-headerColor p-2">
+                        <p className="text-white text-xs">Sau khi xóa sẽ không thể hoàn tác. Bạn chắc chắn muốn xóa bài đăng này?</p>
+                        <div className="flex items-center justify-evenly mt-2">
+                            <div className="flex items-center justify-center w-[60px] text-white cursor-pointer px-2 rounded-full bg-primary"
+                                onClick={handleDeletePost}
+                            >
+                                yes
+                            </div>
+                            <div className="flex items-center justify-center w-[60px] text-white cursor-pointer px-2 rounded-full bg-gray-500"
+                                onClick={() => setShowDeleteBox(false)}
+                            >
+                                no
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
 
 const AlbumItem = ({ data, setListUserAlbums }) => {
     const [showDeleteBox, setShowDeleteBox] = useState(false);
@@ -36,7 +100,7 @@ const AlbumItem = ({ data, setListUserAlbums }) => {
 
                 {showDeleteBox && (
                     <div className="absolute top-16 -left-6 z-10 bg-gray-300 rounded-md p-2 w-150">
-                        <p className="text-black text-xs">Bạn có muốn xóa album này?</p>
+                        <p className="text-white text-xs">Bạn có muốn xóa album này?</p>
                         <div className="flex items-center justify-evenly mt-2">
                             <div className="flex items-center justify-center w-[60px] text-white cursor-pointer px-2 rounded-full bg-headerColor"
                                 onClick={handleDeleteAlbum}
@@ -63,11 +127,22 @@ const UserProfile = () => {
     const [showEditForm, setShowEditForm] = useState(false);
     const [{ user }, dispatch] = useStateValue();
     const [listUserAlbums, setListUserAlbums] = useState([]);
+    const [listPosts, setListPosts] = useState([]);
+    const masonryObj = {
+        default: 3,
+        1100: 2,
+        700: 2,
+        500: 1
+    }
+
     const navigate = useNavigate();
     useEffect(() => {
         if (user) {
             getAllAlbums(user?.id).then((res) => {
                 if (res.data.success) setListUserAlbums(res.data.message);
+            });
+            getPostByArtist(user?.id).then((res) => {
+                if (res.data.success) setListPosts(res.data.message);
             });
         } else {
             navigate("/newsong", { replace: true });
@@ -77,16 +152,16 @@ const UserProfile = () => {
     return (
         <div className="w-full h-full">
             <div className="flex justify-center flex-wrap my-2">
-                <div className="w-full md:w-1/2 rounded-md bg-white p-2 shadow-md flex flex-col items-center gap-2">
+                <div className="w-full md:w-1/2 rounded-md bg-gradient-to-b from-primary to-headerColor p-2 shadow-md flex flex-col items-center gap-2">
                     <div className="w-16 h-16 flex items-center justify-center rounded-full border-2 border-blue-600 relative">
                         <img src={user?.user_avatar ? `${public_server}/users/${user?.user_avatar}` : NotLogin} alt="" className="w-14 h-14 rounded-full object-cover" />
                         {user?.user_role === "artist" && (
                             <BsFillCheckCircleFill className="absolute bottom-1 -right-1 text-blue-600 bg-white rounded-full" />
                         )}
                     </div>
-                    <p className="text-black text-base font-semibold">{user?.user_name} <span className="text-md text-black">- {user?.user_role}</span></p>
-                    <p className="text-black text-xs">Ngày sinh: {user?.user_birthday} tại: {user?.user_country}</p>
-                    <p className="text-black text-xs">Tiểu sử: {user?.user_desc}</p>
+                    <p className="text-white text-base font-semibold">{user?.user_name} <span className="text-md text-white">- {user?.user_role}</span></p>
+                    <p className="text-white text-xs">Ngày sinh: {user?.user_birthday} tại: {user?.user_country}</p>
+                    <p className="text-white text-xs">Tiểu sử: {user?.user_desc}</p>
                     <button className="flex items-center justify-center rounded-md bg-green-600 hover:bg-green-800 text-white px-4 py-1 transiton-all duration-150 ease-in-out"
                         onClick={() => setShowEditForm(!showEditForm)}
                     >
@@ -115,6 +190,15 @@ const UserProfile = () => {
                         <AlbumItem key={i} data={album} setListUserAlbums={setListUserAlbums} />
                     ))}
                 </div>
+                <h4 className="w-full text-xl text-white uppercase my-3">Bài đăng của {user?.user_name}</h4>
+                <Masonry className="masonry-grid gap-4 my-2"
+                    columnClassName="masonry-grid-column"
+                    breakpointCols={masonryObj}
+                >
+                    {listPosts.length > 0 && listPosts.map((post, i) => (
+                        <PostItem data={post} key={i} setListPosts={setListPosts} />
+                    ))}
+                </Masonry>
             </div>
         </div >
     )

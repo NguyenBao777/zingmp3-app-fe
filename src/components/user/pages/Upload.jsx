@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { BsMusicNote } from "react-icons/bs";
-import { FaUserEdit } from "react-icons/fa";
+import { BsFileEarmarkPost, BsMusicNote } from "react-icons/bs";
 import { IoIosAlbums } from "react-icons/io";
 import { RiUserVoiceFill } from "react-icons/ri";
-import { HeaderTheme, UploadSong, UploadAlbum } from "../../../components";
+import { HeaderTheme, UploadSong, UploadAlbum, PostForm } from "../../../components";
 
 const Upload = () => {
     const [uploadType, setUploadType] = useState("song");
@@ -18,11 +17,17 @@ const Upload = () => {
                         <BsMusicNote className="text-xl" />
                         Thêm bài hát
                     </div>
-                    <div className={`text-white cursor-pointer flex items-center justify-center gap-1 px-2 my-1 rounded-full ${uploadType === "author" ? "bg-pink-600/50" : ""}`}
-                        onClick={() => setUploadType("author")}
+                    <div className={`text-white cursor-pointer flex items-center justify-center gap-1 px-2 my-1 rounded-full ${uploadType === "album" ? "bg-pink-600/50" : ""}`}
+                        onClick={() => setUploadType("album")}
                     >
-                        <FaUserEdit className="text-xl" />
-                        Thêm Nhạc sĩ
+                        <IoIosAlbums className="text-xl" />
+                        Thêm Album
+                    </div>
+                    <div className={`text-white cursor-pointer flex items-center justify-center gap-1 px-2 my-1 rounded-full ${uploadType === "post" ? "bg-pink-600/50" : ""}`}
+                        onClick={() => setUploadType("post")}
+                    >
+                        <BsFileEarmarkPost className="text-xl" />
+                        Thêm bài viết
                     </div>
                     <div className={`text-white cursor-pointer flex items-center justify-center gap-1 px-2 my-1 rounded-full ${uploadType === "artist" ? "bg-pink-600/50" : ""}`}
                         onClick={() => setUploadType("artist")}
@@ -30,18 +35,12 @@ const Upload = () => {
                         <RiUserVoiceFill className="text-xl" />
                         Thêm Nghệ sĩ
                     </div>
-                    <div className={`text-white cursor-pointer flex items-center justify-center gap-1 px-2 my-1 rounded-full ${uploadType === "album" ? "bg-pink-600/50" : ""}`}
-                        onClick={() => setUploadType("album")}
-                    >
-                        <IoIosAlbums className="text-xl" />
-                        Thêm Album
-                    </div>
                 </nav>
                 {uploadType !== "" && uploadType === "song" && (
                     <UploadSong />
                 )}
-                {uploadType !== "" && uploadType === "author" && (
-                    <UploadSong />
+                {uploadType !== "" && uploadType === "post" && (
+                    <PostForm />
                 )}
                 {uploadType !== "" && uploadType === "artist" && (
                     <UploadSong />

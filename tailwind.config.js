@@ -71,6 +71,9 @@ module.exports = {
 				primary: "#9b4de0",
 				headerColor: "#37075d",
 			},
+			gridTemplateColumns: {
+				auto: "repeat(auto-fill, 325px)",
+			},
 		},
 	},
 	// plugins: [require("tailwind-scrollbar-hide")],
