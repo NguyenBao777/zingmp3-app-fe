@@ -55,7 +55,6 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
         const currentTimeSeconds = Math.floor(audioRef.current.currentTime % 60) >= 10 ? Math.floor(audioRef.current.currentTime % 60) : "0" + Math.floor(audioRef.current.currentTime % 60);
         const currentSongCurrentTime = `${currentTimeMinutes}:${currentTimeSeconds}`;
         const currentSongProgress = audioRef.current.currentTime / audioRef.current.duration * 100;
-
         dispatch({
             type: actionType.SET_CURRENTSONG,
             currentsong: { ...currentsong, currentTime: currentSongCurrentTime, progress: currentSongProgress, volume: audioRef.current.volume * 100 }
@@ -239,6 +238,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                                 {currentsong?.currentTime ? currentsong?.currentTime : "00:00"}
                             </p>
                             <input type="range" value={currentsong?.progress || 0} className="w-full rounded-full hover:h-[3.5px] h-[2.5px] transition-all duration-75 ease-linear bg-white/25 cursor-pointer"
+                                style={{ backgroundSize: `${currentsong?.progress}% 100%` }}
                                 onChange={(e) => handleSeekSong(e)}
                                 onMouseDown={() => audioRef.current?.pause()}
                                 onMouseUp={() => { if (isPlay) audioRef.current?.play() }}
@@ -255,10 +255,10 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                         </div>
 
 
-                        <div className="cursor-pointer h-8 w-8 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear"
+                        <div className={`${fullScreen ? "shadow-inner shadow-pink-600 text-pink-600" : "text-white"} cursor-pointer h-8 w-8 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear`}
                             onClick={() => setFullScreen(!fullScreen)}
                         >
-                            <TbMicrophone2 className="text-2xl text-white" />
+                            <TbMicrophone2 className="text-2xl" />
                         </div>
 
 
@@ -277,13 +277,14 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                                 </div>
                             </div>
                             <input type="range" value={audioRef.current?.muted ? 0 : (currentsong?.volume || 0)} className="w-full rounded-full hover:h-[3.5px] h-[2.5px] transition-all duration-75 ease-linear bg-white/25 cursor-pointer"
+                                style={{ backgroundSize: `${currentsong?.volume}% 100%` }}
                                 onChange={(e) => handleVolumeChange(e)}
                             />
                         </div>
 
 
 
-                        <div className={`${showPlaylist ? "bg-pink-600/50" : "bg-white/25"} cursor-pointer h-8 w-8 flex items-center justify-center rounded-md hover:bg-white/50 transition-all duration-75 ease-linear`}
+                        <div className={`${showPlaylist ? "bg-gradient-to-b from-primary to-headerColor shadow-md" : "bg-white/25"} cursor-pointer h-8 w-8 flex items-center justify-center rounded-md hover:bg-white/50 transition-all duration-75 ease-linear`}
                             onClick={() => setShowPlaylist(!showPlaylist)}
                         >
                             <BsMusicNoteList className="text-2xl text-white" />
@@ -325,10 +326,11 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                                     </div>
                                 </div>
                                 <input type="range" value={audioRef.current?.muted ? 0 : (currentsong.volume || 0)} className="w-full rounded-full hover:h-[3.5px] h-[2.5px] transition-all duration-75 ease-linear bg-white/25 cursor-pointer"
+                                    style={{ backgroundSize: `${currentsong?.volume}% 100%` }}
                                     onChange={(e) => handleVolumeChange(e)}
                                 />
                             </div>
-                            <div className={`${showPlaylist ? "bg-pink-600/50" : "bg-white/25"} cursor-pointer h-8 w-8 flex items-center justify-center rounded-md hover:bg-white/50 transition-all duration-75 ease-linear`}
+                            <div className={`${showPlaylist ? "bg-gradient-to-b from-primary to-headerColor shadow-md" : "bg-white/25"} cursor-pointer h-8 w-8 flex items-center justify-center rounded-md hover:bg-white/50 transition-all duration-75 ease-linear`}
                                 onClick={() => setShowPlaylist(!showPlaylist)}
                             >
                                 <BsMusicNoteList className="text-2xl text-white" />

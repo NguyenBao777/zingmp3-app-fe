@@ -25,7 +25,7 @@ const SongItem = ({ song, index }) => {
     }
 
     return (
-        <div className={`${currentsong?.song_path === song?.song_path ? "bg-pink-600/25" : ""} group w-full px-4 py-2 rounded-md hover:bg-white/25 flex items-center justify-between gap-4`}>
+        <div className={`${currentsong?.song_path === song?.song_path ? "bg-gradient-to-b from-primary to-headerColor shadow-md" : ""} group w-full px-4 py-2 rounded-md hover:bg-white/25 flex items-center justify-between gap-4`}>
             <span className="text-lg text-white font-bold">{index + 1}</span>
             <div className="flex flex-1 items-center gap-2">
                 <div className="group relative">

@@ -16,7 +16,7 @@ const PlaylistItem = ({ index, song }) => {
     }
 
     return (
-        <div className={`${currentsong?.id === song?.id ? "bg-pink-600/25" : ""} relative group w-full cursor-pointer flex items-center justify-between gap-2 hover:bg-white/25 hover:shadow-md rounded-sm transtion-all duraton-75 ease-in-out p-2`}
+        <div className={`${currentsong?.id === song?.id ? "bg-gradient-to-l from-primary to-headerColor shadow-md" : ""} relative group w-full cursor-pointer flex items-center justify-between gap-2 hover:bg-white/25 hover:shadow-md rounded-sm transtion-all duraton-75 ease-in-out p-2`}
             onClick={() => dispatch({
                 type: actionType.SET_CURRENTSONG,
                 currentsong: song
