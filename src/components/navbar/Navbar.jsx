@@ -28,13 +28,6 @@ const Navbar = () => {
                     Top 100
                 </p>
             </NavLink>
-
-            <NavLink to="/" className={({ isActive }) => isActive ? navActiveStyles : navNoActiveStyles}>
-                <MdOutlineFeaturedVideo className="hidden md:block text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-xl" />
-                <p className="text-white/75 text-[10px] md:text-sm font-semibold group-hover:text-white transion-all duration-150 ease-linear">
-                    MV
-                </p>
-            </NavLink>
         </nav>
     )
 }

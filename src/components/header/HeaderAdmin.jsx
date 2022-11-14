@@ -3,6 +3,7 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { Link, NavLink } from 'react-router-dom';
 import Logo from "../../assets/images/logo/ZingMP3largerlogo.svg.png";
 import { useStateValue } from '../../context/StateProvider';
+import NotLogin from "../../assets/images/icons/NotLogin.png"
 
 const HeaderAdmin = () => {
     const [{ admin }, dispatch] = useStateValue();
@@ -22,11 +23,11 @@ const HeaderAdmin = () => {
             </nav>
             <div className="flex items-center justify-center gap-4">
                 <div className="flex items-center justify-center h-10 w-10 rounded-full overflow-hidden cursor-pointer">
-                    <img src={admin?.admin_image || "https://javpornpics.com/dmm/sora-shiina/h_237zmar00036/sora-shiina-8.jpg"} alt="" className="object-cover w-full h-full" />
+                    <img src={admin?.admin_image || NotLogin} alt="" className="object-cover w-full h-full" />
                 </div>
                 <div className="flex flex-col items-center justify-center gap-1">
-                    <p className="text-white text-base font-semibold">{admin?.admin_name || "Shiina Sora"}</p>
-                    <p className="text-textColor text-sm font-italic">huyền thoại</p>
+                    <p className="text-white text-base font-semibold">{admin?.admin_name || "Chưa đăng nhập"}</p>
+                    <p className="text-textColor text-sm font-italic">{admin?.admin_role}</p>
                 </div>
                 <div className="flex items-center justify-center cursor-pointer"
                     onClick={() => setShowMenu(!showMenu)}

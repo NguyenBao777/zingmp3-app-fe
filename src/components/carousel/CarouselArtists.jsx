@@ -47,7 +47,7 @@ const CarouselArtists = () => {
     return (
         <OwlCarousel className="owl-theme my-2 relative z-0" {...options}>
             {listCarousel.length > 0 && listCarousel.map((carousel, i) => (
-                <Link to={`/artistprofile/${carousel?.id}`} key={i} className="bg-white/25 hover:bg-white/50 transition-all duration-150 ease-in-out rounded-md flex gap-4 p-2 w-full">
+                <Link to={`/artistprofile/${carousel?.id}`} key={i} className="bg-gradient-to-b from-primary to-headerColor transition-all duration-150 ease-in-out rounded-md flex gap-4 p-2 w-full">
                     <img src={`${public_server}/users/${carousel?.user_avatar}`} alt="" className="object-cover h-20 w-20 rounded-md" />
                     <div className="w-full">
                         <p className="text-slate-400 text-sm">Nghệ sĩ</p>

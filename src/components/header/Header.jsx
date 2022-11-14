@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { AiFillSetting, AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineCheck, AiOutlineCloudUpload, AiOutlineSkin } from "react-icons/ai";
 import { IoDiamond, IoNewspaperOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
@@ -70,11 +69,11 @@ const Header = () => {
                     onClick={handleShowLoginForm}
                 >
                     <div className="flex items-center justify-center h-10 w-10 rounded-full overflow-hidden cursor-pointer">
-                        <img src={user?.user_avatar ? `${public_server}/users/${user?.user_avatar}` : NotLogin} alt="" className="object-cover w-full h-full" />
+                        <img src={user && user?.user_avatar ? `${public_server}/users/${user?.user_avatar}` : NotLogin} alt="" className="object-cover w-full h-full" />
                     </div>
-                    <div className={`hidden xl:block`}>
-                        <p className="text-white text-base font-semibold">{user?.user_name || "Đăng nhập"}</p>
-                        <p className="text-white text-[12px] flex items-center gap-2"><GiQueenCrown /> VIP member</p>
+                    <div className="hidden xl:block">
+                        <p className="text-white text-xs font-semibold">{user?.user_name || "Đăng nhập"}</p>
+                        <p className="text-white text-xs flex items-center gap-2"><GiQueenCrown /> {user?.user_role === "artist" ? "Nghệ sĩ" : ""}</p>
                     </div>
                     {showMenu && (
                         <div className="bg-primary w-[175px] rounded-md shadow-md flex flex-col justify-center gap-4 absolute top-12 -left-34 md:-left-7 py-2 px-1">

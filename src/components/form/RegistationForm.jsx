@@ -1,17 +1,14 @@
 import { useState } from 'react'
 import isEmpty from 'validator/lib/isEmpty';
 import { userRegistation } from '../../helpers/helperAPI';
-import { useStateValue } from "../../context/StateProvider";
-import { actionType } from "../../context/reducer";
 
 const RegistationForm = ({ setAlert, setShowLoginForm, setShowRegistationForm }) => {
     const [msgValidation, setMsgValidation] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [name, setName] = useState(false);
-    const [{ user }, dispatch] = useStateValue();
-
+    const [asArtist, setAsArtist] = useState(false);
+    const [name, setName] = useState("");
     const validation = () => {
         const msg = {};
 
@@ -52,7 +49,7 @@ const RegistationForm = ({ setAlert, setShowLoginForm, setShowRegistationForm })
             user_name: name,
             user_username: username,
             user_password: password,
-            user_role: "user"
+            user_role: asArtist ? "artist" : "user"
         }
         userRegistation(formData).then((res) => {
             if (res.data.success) {
@@ -115,6 +112,12 @@ const RegistationForm = ({ setAlert, setShowLoginForm, setShowRegistationForm })
                 <input type="password" id="confirm_password" value={confirmPassword} placeholder="confirm password" autoComplete="true" className="w-full px-2 py-1 border-none outline-none text-black rounded-md cursor-pointer bg-gray-300 focus-within:bg-white transition-all duration-150 ease-in-out"
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
+            </div>
+            <div className="w-full flex items-center justify-start gap-2">
+                <input type="checkbox" checked={asArtist} id="remember" className="w-4 h-4 bg-gray-300 rounded-md cursor-pointer"
+                    onChange={() => setAsArtist(!asArtist)}
+                />
+                <label htmlFor="remember" className="text-white">Tham gia với tư cách nghệ sĩ.</label>
             </div>
             <p className="text-white text-sm">
                 <span className="cursor-pointer text-blue-600" onClick={() => setShowRegistationForm(false)}> Trở lại đăng nhập.</span>

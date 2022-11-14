@@ -16,8 +16,7 @@ const ArtistProfile = () => {
     const [artist, setArtist] = useState(null);
     const [{ playlist, currentsong, isPlay }, dispatch] = useStateValue();
     const artistID = useParams().id;
-    const text = "Có chất giọng cao luyến láy cùng những bản hit RnB hay Dance Pop, Sơn Tùng M-TP là ca sĩ rất thành công, không chỉ nổi tiếng ở Việt Nam mà còn được khán giả yêu nhạc Việt trên thế giới biết đến";
-    console.log(text.length);
+
 
     useEffect(() => {
         getOneUser(artistID).then((res) => {

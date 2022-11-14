@@ -172,3 +172,9 @@ export const deletePost = async (postID) => {
 
 	return res;
 };
+
+export const editPost = async (formData) => {
+	const res = await axios.put(`${baseUrl}/post/edit`, formData);
+
+	return res;
+};

@@ -1,16 +1,35 @@
 import { useState, useEffect } from 'react'
-import { AiOutlineEdit, AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlineCheckCircle, AiOutlineEdit, AiOutlinePlus } from 'react-icons/ai';
 import { BsFillCheckCircleFill, BsPlayCircle, BsTrash } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import { useStateValue } from '../../../context/StateProvider'
-import { deleteAlbum, deletePost, getAllAlbums, getPostByArtist, public_server } from '../../../helpers/helperAPI';
+import { deleteAlbum, deletePost, editPost, getAllAlbums, getPostByArtist, public_server } from '../../../helpers/helperAPI';
 import NotLogin from "../../../assets/images/icons/NotLogin.png";
 import { EditUserForm } from '../../../components';
 import Masonry from 'react-masonry-css';
+import { MdOutlineCancel } from 'react-icons/md';
+import isEmpty from 'validator/lib/isEmpty';
 
 const PostItem = ({ data, setListPosts }) => {
     const [{ user }, dispatch] = useStateValue();
+    const [postContent, setPostContent] = useState(data?.post_content);
+    const [showEditPost, setShowEditPost] = useState(false);
     const [showDeleteBox, setShowDeleteBox] = useState(false);
+    const [msgValidation, setMsgValidation] = useState("");
+
+    const validation = () => {
+        const msg = {};
+
+        if (isEmpty(postContent)) {
+            msg.post_content = "Vui lòng nhập nội dung bài đăng.";
+        }
+
+        setMsgValidation(msg);
+        setTimeout(() => setMsgValidation(""), 1500);
+        if (Object.keys(msg).length > 0) return true;
+
+        return false;
+    }
 
     const handleDeletePost = () => {
         deletePost(data?.id).then((res) => {
@@ -21,8 +40,23 @@ const PostItem = ({ data, setListPosts }) => {
         });
     }
 
+    const handleEditPost = () => {
+        if (validation()) return;
+        // handleEditPost
+        const formData = {
+            post_content: postContent,
+            post_id: data?.id
+        }
+        editPost(formData).then((res) => {
+            if (res.data.success) {
+                setShowEditPost(false);
+                data.post_content = postContent;
+            }
+        });
+    }
+
     return (
-        <div className="flex flex-col gap-2 rounded-md bg-slate-400/25 p-2 hover:bg-slate-400/75 transition-all duration-150 ease-in-out">
+        <div className="flex flex-col gap-2 rounded-md bg-gradient-to-b from-primary to-headerColor p-2 shadow-md">
             <div className="flex items-center gap-4">
                 <img src={`${public_server}/users/${user?.user_avatar}`} alt="" className="object-cover h-12 w-12 rounded-full" />
                 <div className="flex flex-col gap-2">
@@ -30,9 +64,33 @@ const PostItem = ({ data, setListPosts }) => {
                     <p className="text-slate-300 text-xs">{data?.created_at}</p>
                 </div>
             </div>
-            <p className="text-white text-base">
-                {data?.post_content}
-            </p>
+            {showEditPost ? (
+                <>
+                    <textarea rows="5" value={postContent} className="border-none outline-none bg-transparent text-white"
+                        onChange={(e) => setPostContent(e.target.value)}
+                    />
+                    <p className="text-red-700 font-light ml-2 text-xs italic">
+                        <span className={`${msgValidation?.post_content ? "visible" : "invisible"}`}>* </span>
+                        {msgValidation?.post_content}
+                    </p>
+                    <div className="flex items-center justify-end gap-4">
+                        <button className="flex items-center justify-center w-[45px] bg-green-600 hover:bg-green-800 transition-all duration-150 ease-in-out rounded-md px-2 py-1"
+                            onClick={handleEditPost}
+                        >
+                            <AiOutlineCheckCircle className="text-white text-2xl" />
+                        </button>
+                        <button className="flex items-center justify-center w-[45px] bg-red-600 hover:bg-red-800 transition-all duration-150 ease-in-out rounded-md px-2 py-1"
+                            onClick={() => setShowEditPost(false)}
+                        >
+                            <MdOutlineCancel className="text-white text-2xl" />
+                        </button>
+                    </div>
+                </>
+            ) : (
+                <p className="text-white text-base">
+                    {data?.post_content}
+                </p>
+            )}
             {data?.post_image && (
                 <img src={`${public_server}/posts/${data?.post_image}`} alt="" className="object-cover w-full rounded-md" />
             )}
@@ -44,7 +102,9 @@ const PostItem = ({ data, setListPosts }) => {
                     <p className="text-white text-base">Xóa</p>
                 </button>
 
-                <button className="flex items-center justify-center gap-2 px-2 py-1 bg-green-600 hover:bg-green-800 transition-all duration-150 ease-in-out rounded-md">
+                <button className="flex items-center justify-center gap-2 px-2 py-1 bg-green-600 hover:bg-green-800 transition-all duration-150 ease-in-out rounded-md"
+                    onClick={() => setShowEditPost(!showEditPost)}
+                >
                     <AiOutlineEdit className="text-white text-2xl" />
                     <p className="text-white text-base">Sửa</p>
                 </button>

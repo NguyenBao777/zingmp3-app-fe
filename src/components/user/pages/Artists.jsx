@@ -26,12 +26,17 @@ const PostItem = ({ data }) => {
     }
 
     return (
-        <div className="flex flex-col gap-2 rounded-md bg-slate-400/25 p-2 hover:bg-slate-400/75 transition-all duration-150 ease-in-out">
+        <div className="flex flex-col gap-2 rounded-md bg-gradient-to-b from-primary to-headerColor p-2 shadow-md">
             <div className="flex items-center gap-4">
                 <img src={`${public_server}/users/${artist?.user_avatar}`} alt="" className="object-cover h-12 w-12 rounded-full" />
                 <div className="flex flex-col gap-2">
                     <p className="text-white text-base font-semibold">{artist?.user_name}</p>
-                    <p className="text-slate-300 text-xs">{data?.created_at}</p>
+                    <p className="text-slate-300 text-xs">
+                        {data?.created_at}
+                        <span className="text-xs">
+                            {data?.created_at !== data?.updated_at ? " ● Đã chỉnh sửa" : ""}
+                        </span>
+                    </p>
                 </div>
             </div>
             <p className="text-white text-base">
