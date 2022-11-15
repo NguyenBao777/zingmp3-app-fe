@@ -49,8 +49,8 @@ export const addNewSong = async (formData) => {
 	return res;
 };
 
-export const getNewSong = async () => {
-	const res = await axios.get(`${baseUrl}/song/getnew`);
+export const getNewSong = async (pages = 1, limit = 10) => {
+	const res = await axios.get(`${baseUrl}/song/getnew/${pages}/${limit}`);
 
 	return res;
 };
@@ -80,8 +80,8 @@ export const searchSongs = async (keywords) => {
 	return res;
 };
 
-export const getSongByCategory = async (categoryID) => {
-	const res = await axios.get(`${baseUrl}/song/getbycategory/${categoryID}`);
+export const getSongByCategory = async (categoryID, pages = 1, limit = 5) => {
+	const res = await axios.get(`${baseUrl}/song/getbycategory/${categoryID}/${pages}/${limit}`);
 
 	return res;
 };

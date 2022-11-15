@@ -6,7 +6,7 @@ import { MdKeyboardArrowDown, MdOutlineLocalMovies } from "react-icons/md";
 import { TbMicrophone2, TbPictureInPicture } from "react-icons/tb";
 import { FiVolume2, FiVolumeX } from "react-icons/fi";
 import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import IconIsPlay from "../../assets/images/icons/icon-playing.gif";
 import { useStateValue } from "../../context/StateProvider";
 import { public_server, updateSongListened } from "../../helpers/helperAPI";
@@ -130,42 +130,46 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
 
     return (
         <>
-            {fullScreen && (
-                <motion.div className="fixed top-0 left-0 bottom-0 right-0 z-30 bg-[url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme-player/zma.png')] flex-1 flex items-center justify-center gap-10 px-4 pb-28 transition-all duration-200 ease-in-out"
-                    initial={{ opacity: 0, y: 2000 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 0 }}
-                >
-                    <div className="cursor-pointer absolute top-2 right-2 h-8 w-8 flex items-center justify-center rounded-full bg-white/25 hover:bg-gray-600/25 transition-all duration-75 ease-linear"
-                        onClick={() => setFullScreen(false)}
-                    >
-                        <MdKeyboardArrowDown className="text-2xl text-white" />
-                    </div>
-                    <div className="relative hidden md:block cursor-pointer group"
-                        onClick={() => dispatch({
-                            type: actionType.SET_ISPLAY,
-                            isPlay: !isPlay
-                        })}
-                    >
-                        <img src={`${public_server}/songs/${currentsong?.song_cover}`} alt="" className={`object-cover h-300 w-300 transition-all ease-linear ${isPlay ? "animate-spin duration-3000 rounded-full" : "rounded-md"}`} />
-                        {!isPlay && (
-                            <div className="hidden group-hover:flex items-center justify-center absolute bottom-1/2 left-1/2 -translate-x-1/2 translate-y-1/2">
-                                <BsPlayCircle className="text-[3.5rem] text-white" />
-                            </div>
-                        )}
-                        {isPlay && (
-                            <div className="w-14 h-14 rounded-full border border-white flex items-center justify-center absolute bottom-1/2 left-1/2 -translate-x-1/2 translate-y-1/2">
-                                <img src={IconIsPlay} alt="" className="object-cover h-8 w-8" />
-                            </div>
-                        )}
-                    </div>
-                    <p className="text-white text-3xl w-656 h-420 overflow-y-auto px-2 scroll-custom">
-                        {currentsong?.song_lyric}
-                    </p>
+            <AnimatePresence>
 
-                </motion.div>
-            )}
 
+                {fullScreen && (
+                    <motion.div className="fixed top-0 left-0 bottom-0 right-0 z-30 bg-[url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme-player/zma.png')] flex-1 flex items-center justify-center gap-10 px-4 pb-28 transition-all duration-75 ease-in-out"
+                        initial={{ opacity: 0, y: 2000 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 0 }}
+                    >
+                        <div className="cursor-pointer absolute top-2 right-2 h-8 w-8 flex items-center justify-center rounded-full bg-white/25 hover:bg-gray-600/25 transition-all duration-75 ease-linear"
+                            onClick={() => setFullScreen(false)}
+                        >
+                            <MdKeyboardArrowDown className="text-2xl text-white" />
+                        </div>
+                        <div className="relative hidden md:block cursor-pointer group"
+                            onClick={() => dispatch({
+                                type: actionType.SET_ISPLAY,
+                                isPlay: !isPlay
+                            })}
+                        >
+                            <img src={`${public_server}/songs/${currentsong?.song_cover}`} alt="" className={`object-cover h-300 w-300 transition-all ease-linear ${isPlay ? "animate-spin duration-3000 rounded-full" : "rounded-md"}`} />
+                            {!isPlay && (
+                                <div className="hidden group-hover:flex items-center justify-center absolute bottom-1/2 left-1/2 -translate-x-1/2 translate-y-1/2">
+                                    <BsPlayCircle className="text-[3.5rem] text-white" />
+                                </div>
+                            )}
+                            {isPlay && (
+                                <div className="w-14 h-14 rounded-full border border-white flex items-center justify-center absolute bottom-1/2 left-1/2 -translate-x-1/2 translate-y-1/2">
+                                    <img src={IconIsPlay} alt="" className="object-cover h-8 w-8" />
+                                </div>
+                            )}
+                        </div>
+                        <p className="text-white text-3xl w-656 h-420 overflow-y-auto px-2 scroll-custom">
+                            {currentsong?.song_lyric}
+                        </p>
+
+                    </motion.div>
+                )}
+
+            </AnimatePresence>
             <motion.div className="fixed bottom-0 left-0 z-30 w-full bg-[url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme-player/zma.png')] bg-repeat flex flex-col justify-between gap-4 px-4 py-2 z-30 transiton-all duration-150 ease-linear border-t border-green-800"
                 initial={{ opacity: 0.5, x: -1000 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -238,7 +242,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                                 {currentsong?.currentTime ? currentsong?.currentTime : "00:00"}
                             </p>
                             <input type="range" value={currentsong?.progress || 0} className="w-full rounded-full hover:h-[3.5px] h-[2.5px] transition-all duration-75 ease-linear bg-white/25 cursor-pointer"
-                                style={{ backgroundSize: `${currentsong?.progress}% 100%` }}
+                                style={{ backgroundSize: currentsong?.progress ? `${currentsong?.progress}% 100%` : "0% 100%" }}
                                 onChange={(e) => handleSeekSong(e)}
                                 onMouseDown={() => audioRef.current?.pause()}
                                 onMouseUp={() => { if (isPlay) audioRef.current?.play() }}
@@ -277,7 +281,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                                 </div>
                             </div>
                             <input type="range" value={audioRef.current?.muted ? 0 : (currentsong?.volume || 0)} className="w-full rounded-full hover:h-[3.5px] h-[2.5px] transition-all duration-75 ease-linear bg-white/25 cursor-pointer"
-                                style={{ backgroundSize: `${currentsong?.volume}% 100%` }}
+                                style={{ backgroundSize: currentsong?.volume ? `${currentsong?.volume}% 100%` : "0% 100%" }}
                                 onChange={(e) => handleVolumeChange(e)}
                             />
                         </div>
@@ -326,7 +330,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                                     </div>
                                 </div>
                                 <input type="range" value={audioRef.current?.muted ? 0 : (currentsong.volume || 0)} className="w-full rounded-full hover:h-[3.5px] h-[2.5px] transition-all duration-75 ease-linear bg-white/25 cursor-pointer"
-                                    style={{ backgroundSize: `${currentsong?.volume}% 100%` }}
+                                    style={{ backgroundSize: currentsong?.volume ? `${currentsong?.volume}% 100%` : "0% 100%" }}
                                     onChange={(e) => handleVolumeChange(e)}
                                 />
                             </div>

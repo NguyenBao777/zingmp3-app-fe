@@ -52,7 +52,7 @@ const Sidebar = () => {
                     <AiOutlinePlayCircle className="hidden lg:block text-white text-2xl opacity-0 group-hover:opacity-100 transition-all duration-150 ease-linear" />
                 </NavLink>
 
-                <NavLink to="/" className={({ isActive }) => isActive ? activeStyles : noActiveStyles}>
+                {/* <NavLink to="/" className={({ isActive }) => isActive ? activeStyles : noActiveStyles}>
                     <span className="flex items-center gap-4">
                         <VscRadioTower className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-4xl lg:text-2xl" />
                         <p className="hidden lg:block text-white/75 text-base font-semibold group-hover:text-white transion-all duration-150 ease-linear">
@@ -60,7 +60,7 @@ const Sidebar = () => {
                         </p>
                     </span>
                     <AiOutlinePlayCircle className="hidden lg:block text-white text-2xl opacity-0 group-hover:opacity-100 transition-all duration-150 ease-linear" />
-                </NavLink>
+                </NavLink> */}
 
                 <NavLink to="/artists" className={({ isActive }) => isActive ? activeStyles : noActiveStyles}>
                     <BsNewspaper className="text-white/75 group-hover:text-white transition-all duration-150 ease-linear text-4xl lg:text-2xl" />

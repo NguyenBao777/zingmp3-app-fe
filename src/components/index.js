@@ -18,6 +18,7 @@ export { default as EditUserForm } from "./form/EditUserForm";
 export { default as LoginForm } from "./form/LoginForm";
 export { default as RegistationForm } from "./form/RegistationForm";
 export { default as Alert } from "../helpers/Alert";
+export { default as Pagination } from "./pagination/Pagination";
 // user
 export { default as Home } from "./user/pages/Home";
 export { default as ZingChart } from "./user/pages/ZingChart";

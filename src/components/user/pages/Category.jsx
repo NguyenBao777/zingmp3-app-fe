@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
 import { getAllCategory, getSongByCategory, public_server } from '../../../helpers/helperAPI';
-import { SongItem } from '../../../components';
+import { SongItem, Pagination } from '../../../components';
 
 const CategoryItem = ({ data, setCategoryID }) => {
 
@@ -22,22 +21,36 @@ const Category = () => {
     const [categoryID, setCategoryID] = useState(0);
     const [listCategory, setListCategory] = useState([]);
     const [listSongs, setListSongs] = useState([]);
+    // get Pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [totalPages, setTotalPages] = useState(0);
+
     useEffect(() => {
         if (listCategory.length <= 0) {
             getAllCategory(10).then((res) => {
                 if (res.data.success) {
                     setListCategory(res.data.message);
-                    setCategoryID(listCategory[0]?.id);
                 }
+
             });
         }
     }, []);
 
     useEffect(() => {
-        getSongByCategory(categoryID).then((res) => {
-            if (res.data.success) setListSongs(res.data.message);
+        getSongByCategory(categoryID, currentPage, itemsPerPage).then((res) => {
+            if (res.data.success) {
+                setListSongs(res.data.message);
+                setTotalPages(res.data.total);
+            }
         })
     }, [categoryID]);
+
+    useEffect(() => {
+        setCategoryID(listCategory[0]?.id);
+    }, [listCategory]);
+
+
 
     return (
         <section className="w-full">
@@ -50,6 +63,7 @@ const Category = () => {
                 {listSongs.length > 0 && listSongs.map((song, i) => (
                     <SongItem song={song} index={i} key={i} />
                 ))}
+                <Pagination itemsPerPage={itemsPerPage} totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             </div>
         </section>
     )

@@ -26,7 +26,7 @@ const PlaylistItem = ({ index, song }) => {
             <img src={`${public_server}/songs/${song?.song_cover}`} alt="" className="object-cover w-10 h-10 rounded-md" />
             <div className="flex flex-1 flex-col items-start justify-center">
                 <p className="text-white text-base">{song?.song_name}</p>
-                <p className="text-gray-600/75 text-xs">{song?.artist_name}</p>
+                <p className="text-white text-xs">{song?.artist_name}</p>
             </div>
             <p className="text-white text-sm">{song?.song_duration}</p>
             <div className="cursor-pointer h-6 w-6 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear p-1"

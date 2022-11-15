@@ -8,6 +8,7 @@ import { getAllAlbums, getOneUser, getSongByArtistID, public_server } from '../.
 import { actionType } from '../../../context/reducer';
 import { useStateValue } from '../../../context/StateProvider';
 import { Link, useParams } from 'react-router-dom';
+import NotLogin from "../../../assets/images/icons/NotLogin.png"
 
 const ArtistProfile = () => {
     const [readMore, setReadMore] = useState(false);
@@ -59,7 +60,7 @@ const ArtistProfile = () => {
                         <h4 className="text-4xl font-bold text-white">{artist?.user_name}</h4>
                         <img src={zmaAward} alt="" className="object-cover w-8 h-8" />
                     </div>
-                    {artist?.user_desc.length > 193 ? (
+                    {artist?.user_desc && artist?.user_desc.length > 193 ? (
                         <p className="text-base text-white">
                             {artist?.user_desc.slice(0, 193) + "..."}
                             <span className="text-white uppercase cursor-pointer hover:text-blue-800 transition-all duration-150 ease-in-out"
@@ -74,7 +75,7 @@ const ArtistProfile = () => {
                     }
 
                 </div>
-                <img src={`${public_server}/users/${artist?.user_avatar}`} alt="" className="object-cover h-52 w-52 rounded-full" />
+                <img src={artist?.user_avatar ? `${public_server}/users/${artist?.user_avatar}` : NotLogin} alt="" className="object-cover h-52 w-52 rounded-full" />
             </div>
 
             <h4 className="text-white font-semibold uppercase my-4">Bài hát</h4>
@@ -84,7 +85,8 @@ const ArtistProfile = () => {
                     <div className="group rounded-md w-60 h-60 overflow-hidden cursor-pointer relative"
                         onClick={handlePlaySong}
                     >
-                        <img src={currentsong ? `${public_server}/songs/${currentsong?.song_cover}` : `${public_server}/users/${artist?.user_avatar}`} alt=""
+
+                        <img src={currentsong ? `${public_server}/songs/${currentsong?.song_cover}` : `${public_server}/users/${artist?.user_avatar} `} alt=""
                             className={`${isPlay ? "animate-spin duration-3000 rounded-full" : "rounded-md hover:scale-125"} object-cover w-full h-full transition-all duration-200 ease-in-out`} />
                         {!isPlay && (
                             <div className="hidden group-hover:flex items-center justify-center absolute bottom-1/2 left-1/2 -translate-x-1/2 translate-y-1/2">
@@ -96,6 +98,7 @@ const ArtistProfile = () => {
                                 <img src={IconIsPlay} alt="" className="object-cover h-8 w-8" />
                             </div>
                         )}
+
                     </div>
                     <button className="flex items-center justify-center gap-1 rounded-full px-4 py-2 bg-pink-500 text-white"
                         onClick={() => dispatch({
