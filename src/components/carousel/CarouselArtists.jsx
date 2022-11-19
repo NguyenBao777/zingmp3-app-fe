@@ -17,7 +17,7 @@ const CarouselArtists = () => {
         items: 1,
         center: true,
         dots: false,
-        nav: true,
+        nav: false,
         responsive: {
             0: {
                 items: 1,

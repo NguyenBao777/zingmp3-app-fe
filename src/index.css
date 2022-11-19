@@ -129,6 +129,12 @@ input[type="range"]::-webkit-progress-value {
 	margin-bottom: 1rem;
 }
 
+/* overflow-y-overlay */
+.overflow-y-overlay {
+	overflow-y: overlay;
+	scroll-behavior: smooth;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

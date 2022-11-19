@@ -155,8 +155,8 @@ export const addNewPost = async (formData) => {
 	return res;
 };
 
-export const getAllPost = async (limit = 20) => {
-	const res = await axios.get(`${baseUrl}/post/getall/${limit}`);
+export const getAllPost = async (limit = 3, pages = 1) => {
+	const res = await axios.get(`${baseUrl}/post/getall/${limit}/${pages}`);
 
 	return res;
 };

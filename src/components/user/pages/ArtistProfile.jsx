@@ -100,15 +100,17 @@ const ArtistProfile = () => {
                         )}
 
                     </div>
-                    <button className="flex items-center justify-center gap-1 rounded-full px-4 py-2 bg-pink-500 text-white"
-                        onClick={() => dispatch({
-                            type: actionType.SET_PLAYLIST,
-                            playlist: listSongs
-                        })}
-                    >
-                        <BsPlayFill className="text-white text-2xl" />
-                        Phát toàn bộ
-                    </button>
+                    {listSongs.length > 0 && (
+                        <button className="flex items-center justify-center gap-1 rounded-full px-4 py-2 bg-pink-500 text-white"
+                            onClick={() => dispatch({
+                                type: actionType.SET_PLAYLIST,
+                                playlist: listSongs
+                            })}
+                        >
+                            <BsPlayFill className="text-white text-2xl" />
+                            Phát toàn bộ
+                        </button>
+                    )}
                 </div>
                 <div className="w-full lg:w-2/3 p-2 flex flex-col items-center justify-center gap-2">
                     {listSongs.length > 0 && listSongs.map((song, i) => (
@@ -140,7 +142,7 @@ const ArtistProfile = () => {
                         </span>
                         <img src={`${public_server}/users/${artist?.user_avatar}`} alt="" className="object-cover h-32 w-32 rounded-full" />
                         <h4 className="text-lg text-white uppercase font-bold">{artist?.user_name}</h4>
-                        <div className="max-h-[300px] text-slate-300 overflow-y-auto">{artist?.user_desc}</div>
+                        <div className="max-h-[300px] text-slate-300 overflow-y-auto scroll-custom">{artist?.user_desc}</div>
                     </div>
                 </div>
             )}

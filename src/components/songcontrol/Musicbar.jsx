@@ -24,13 +24,22 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
     const [isRandom, setIsRandom] = useState(false);
     const [randomArr, setRandomArr] = useState([]);
     const audioRef = useRef();
+    const lyricRef = useRef();
+
 
     useEffect(() => {
         dispatch({
             type: actionType.SET_CURRENTSONG,
             currentsong: playlist[currentIndex]
         });
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if (lyricRef.current) {
+            const scrollHeight = Math.floor(lyricRef.current.scrollHeight * 0.009);
+            lyricRef.current.scrollTop = currentsong.progress * scrollHeight;
+        }
+    }, [currentsong?.progress]);
 
     useEffect(() => {
         dispatch({
@@ -59,7 +68,6 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
             type: actionType.SET_CURRENTSONG,
             currentsong: { ...currentsong, currentTime: currentSongCurrentTime, progress: currentSongProgress, volume: audioRef.current.volume * 100 }
         });
-
     }
 
     const handleSeekSong = (e) => {
@@ -131,8 +139,6 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
     return (
         <>
             <AnimatePresence>
-
-
                 {fullScreen && (
                     <motion.div className="fixed top-0 left-0 bottom-0 right-0 z-30 bg-[url('https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/theme-player/zma.png')] flex-1 flex items-center justify-center gap-10 px-4 pb-28 transition-all duration-75 ease-in-out"
                         initial={{ opacity: 0, y: 2000 }}
@@ -162,7 +168,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                                 </div>
                             )}
                         </div>
-                        <p className="text-white text-3xl w-656 h-420 overflow-y-auto px-2 scroll-custom">
+                        <p ref={lyricRef} className={`text-white text-3xl w-656 h-420 px-2 scroll-custom ${isPlay ? "overflow-y-hidden" : "overflow-y-overlay"}`}>
                             {currentsong?.song_lyric}
                         </p>
 

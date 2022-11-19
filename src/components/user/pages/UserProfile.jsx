@@ -9,6 +9,7 @@ import { EditUserForm } from '../../../components';
 import Masonry from 'react-masonry-css';
 import { MdOutlineCancel } from 'react-icons/md';
 import isEmpty from 'validator/lib/isEmpty';
+import { IoCloseOutline } from 'react-icons/io5';
 
 const PostItem = ({ data, setListPosts }) => {
     const [{ user }, dispatch] = useStateValue();
@@ -188,6 +189,7 @@ const UserProfile = () => {
     const [{ user }, dispatch] = useStateValue();
     const [listUserAlbums, setListUserAlbums] = useState([]);
     const [listPosts, setListPosts] = useState([]);
+    const [readMore, setReadMore] = useState(false);
     const masonryObj = {
         default: 3,
         1100: 2,
@@ -221,7 +223,21 @@ const UserProfile = () => {
                     </div>
                     <p className="text-white text-base font-semibold">{user?.user_name} <span className="text-md text-white">- {user?.user_role}</span></p>
                     <p className="text-white text-xs">Ngày sinh: {user?.user_birthday} tại: {user?.user_country}</p>
-                    <p className="text-white text-xs">Tiểu sử: {user?.user_desc}</p>
+                    <p className="text-white text-xs">Tiểu sử:
+                        {user?.user_desc && user?.user_desc.length > 193 ? (
+                            <p className="text-base text-white">
+                                {user?.user_desc.slice(0, 193) + "..."}
+                                <span className="text-white uppercase cursor-pointer hover:text-blue-800 transition-all duration-150 ease-in-out"
+                                    onClick={() => setReadMore(!readMore)}
+                                >Xem thêm</span>
+                            </p>
+                        ) : (
+                            <p className="text-base text-white">
+                                {user?.user_desc}
+                            </p>
+                        )
+                        }
+                    </p>
                     <button className="flex items-center justify-center rounded-md bg-green-600 hover:bg-green-800 text-white px-4 py-1 transiton-all duration-150 ease-in-out"
                         onClick={() => setShowEditForm(!showEditForm)}
                     >
@@ -259,6 +275,19 @@ const UserProfile = () => {
                         <PostItem data={post} key={i} setListPosts={setListPosts} />
                     ))}
                 </Masonry>
+
+                {readMore && (
+                    <div className="fixed z-30 bg-black/75 top-0 bottom-0 left-0 right-0 flex items-center justify-center">
+                        <div className="relative w-[350px] bg-gradient-to-b from-primary to-headerColor rounded-md flex flex-col gap-4 p-4 items-center">
+                            <span className="absolute top-1 right-1 cursor-pointer" onClick={() => setReadMore(false)}>
+                                <IoCloseOutline className="text-2xl text-white" />
+                            </span>
+                            <img src={`${public_server}/users/${user?.user_avatar}`} alt="" className="object-cover h-32 w-32 rounded-full" />
+                            <h4 className="text-lg text-white uppercase font-bold">{user?.user_name}</h4>
+                            <div className="max-h-[300px] text-slate-300 overflow-y-auto scroll-custom">{user?.user_desc}</div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div >
     )

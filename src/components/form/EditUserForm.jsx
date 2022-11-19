@@ -15,7 +15,7 @@ const EditUserForm = () => {
     const [tempAvatar, setTempAvatar] = useState("");
     const [file, setFile] = useState(null);
     const [oldImage, setOldImage] = useState(user?.user_avatar);
-    const [userBirthday, setUserBirthday] = useState(new Date(user?.user_birthday || ""));
+    const [userBirthday, setUserBirthday] = useState(user?.user_birthday ? new Date(user?.user_birthday) : new Date());
     const [userDesc, setUserDesc] = useState(user?.user_desc || "");
     const [userCountry, setUserCountry] = useState(user?.user_country || "");
 

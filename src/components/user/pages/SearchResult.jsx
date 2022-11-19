@@ -38,7 +38,6 @@ const SearchResult = () => {
             <h4 className="text-white font-bold text-lg uppercase">Albums</h4>
             <div className="flex flex-wrap items-center gap-4">
                 {listAlbums.length > 0 && listAlbums.map((album, i) => (
-
                     <Link key={i} to={`/albumdetail/${album?.album_code}`} className="bg-white/25 hover:bg-white/50 transition-all duration-150 ease-in-out rounded-md flex gap-4 p-2 md:w-[30%] w-full">
                         <img src={`${public_server}/albums/${album?.album_cover}`} alt="" className="object-cover h-24 w-24 rounded-md" />
                         <div className="">
