@@ -5,7 +5,7 @@ import { getNewSong } from "../../../helpers/helperAPI";
 const NewSong = () => {
     const [listNewSong, setListNewSong] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(5);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
     const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {

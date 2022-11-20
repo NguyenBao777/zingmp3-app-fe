@@ -59,7 +59,7 @@ const PostItem = ({ data, setListPosts }) => {
     return (
         <div className="flex flex-col gap-2 rounded-md bg-gradient-to-b from-primary to-headerColor p-2 shadow-md">
             <div className="flex items-center gap-4">
-                <img src={`${public_server}/users/${user?.user_avatar}`} alt="" className="object-cover h-12 w-12 rounded-full" />
+                <img src={user?.user_avatar ? `${public_server}/users/${user?.user_avatar}` : NotLogin} alt="" className="object-cover h-12 w-12 rounded-full" />
                 <div className="flex flex-col gap-2">
                     <p className="text-white text-base font-semibold">{user?.user_name}</p>
                     <p className="text-slate-300 text-xs">{data?.created_at}</p>
@@ -282,7 +282,7 @@ const UserProfile = () => {
                             <span className="absolute top-1 right-1 cursor-pointer" onClick={() => setReadMore(false)}>
                                 <IoCloseOutline className="text-2xl text-white" />
                             </span>
-                            <img src={`${public_server}/users/${user?.user_avatar}`} alt="" className="object-cover h-32 w-32 rounded-full" />
+                            <img src={user?.user_avatar ? `${public_server}/users/${user?.user_avatar}` : NotLogin} alt="" className="object-cover h-32 w-32 rounded-full" />
                             <h4 className="text-lg text-white uppercase font-bold">{user?.user_name}</h4>
                             <div className="max-h-[300px] text-slate-300 overflow-y-auto scroll-custom">{user?.user_desc}</div>
                         </div>

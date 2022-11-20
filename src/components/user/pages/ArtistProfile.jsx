@@ -140,7 +140,7 @@ const ArtistProfile = () => {
                         <span className="absolute top-1 right-1 cursor-pointer" onClick={() => setReadMore(false)}>
                             <IoCloseOutline className="text-2xl text-white" />
                         </span>
-                        <img src={`${public_server}/users/${artist?.user_avatar}`} alt="" className="object-cover h-32 w-32 rounded-full" />
+                        <img src={artist ? `${public_server}/users/${artist?.user_avatar}` : NotLogin} alt="" className="object-cover h-32 w-32 rounded-full" />
                         <h4 className="text-lg text-white uppercase font-bold">{artist?.user_name}</h4>
                         <div className="max-h-[300px] text-slate-300 overflow-y-auto scroll-custom">{artist?.user_desc}</div>
                     </div>

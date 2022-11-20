@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import NotLogin from "../../../assets/images/icons/NotLogin.png";
 import { getAllArtists, getAllPost, getOneUser, public_server } from '../../../helpers/helperAPI';
 import { CarouselArtists } from "../../../components";
 import Masonry from 'react-masonry-css';
@@ -31,7 +31,7 @@ const PostItem = ({ data }) => {
     return (
         <div className="flex flex-col gap-2 rounded-md bg-gradient-to-b from-primary to-headerColor p-2 shadow-md">
             <div className="flex items-center gap-4">
-                <img src={`${public_server}/users/${artist?.user_avatar}`} alt="" className="object-cover h-12 w-12 rounded-full" />
+                <img src={artist?.user_avatar ? `${public_server}/users/${artist?.user_avatar}` : NotLogin} alt="" className="object-cover h-12 w-12 rounded-full" />
                 <div className="flex flex-col gap-2">
                     <p className="text-white text-base font-semibold">{artist?.user_name}</p>
                     <p className="text-slate-300 text-xs">
@@ -116,11 +116,8 @@ const PostItem = ({ data }) => {
     )
 }
 
-const Artists = () => {
+const Artists = ({ listPosts = [] }) => {
     const [listArtists, setListArtists] = useState([]);
-    const [listPosts, setListPosts] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(6);
 
     const masonryObj = {
         default: 3,
@@ -128,27 +125,13 @@ const Artists = () => {
         700: 2,
         500: 1
     }
+
     useEffect(() => {
         getAllArtists().then((res) => {
             if (res.data.success) setListArtists(res.data.message);
         });
-        getAllPost(itemsPerPage, currentPage).then((res) => {
-            if (res.data.success) setListPosts(res.data.message);
-        });
     }, []);
 
-    useEffect(() => {
-        getAllPost(itemsPerPage, currentPage).then((res) => {
-            if (res.data.success) setListPosts([...listPosts, ...res.data.message]);
-        });
-    }, [currentPage]);
-
-    const handleScroll = (e) => {
-        if (e.target.scrollTop > 300 * currentPage) {
-            setCurrentPage(currentPage + 1);
-        }
-
-    }
 
 
     return (
@@ -156,10 +139,9 @@ const Artists = () => {
             <h4 className="text-white font-semibold uppercase">Nghệ sĩ nổi bật</h4>
             <CarouselArtists />
             <h4 className="text-white font-semibold uppercase">Bài đăng mới</h4>
-            <Masonry className="masonry-grid gap-4 my-2 max-h-[500px] overflow-y-auto scroll-custom"
+            <Masonry className="masonry-grid gap-4 my-2"
                 columnClassName="masonry-grid-column"
                 breakpointCols={masonryObj}
-                onScroll={(e) => handleScroll(e)}
             >
                 {listPosts.length > 0 && listPosts.map((post, i) => (
                     <PostItem data={post} key={i} />

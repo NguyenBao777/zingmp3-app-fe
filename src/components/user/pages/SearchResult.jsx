@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { public_server, searchAlbums, searchArtist, searchSongs } from '../../../helpers/helperAPI';
 import { SongItem } from "../../../components";
+import NotLogin from "../../../assets/images/icons/NotLogin.png";
 const SearchResult = () => {
     const [listSongs, setListSongs] = useState([]);
     const [listAlbums, setListAlbums] = useState([]);
@@ -26,7 +27,7 @@ const SearchResult = () => {
             <div className="w-full flex flex-wrap items-center gap-4">
                 {listArtists.length > 0 && listArtists.map((artist, i) => (
                     <Link to={`/artistprofile/${artist?.id}`} key={i} className="w-full md:w-[30%] bg-white/25 hover:bg-white/50 transition-all duration-150 ease-in-out rounded-md flex flex-wrap gap-4 p-2">
-                        <img src={`${public_server}/users/${artist?.user_avatar}`} alt="" className="object-cover h-24 w-24 rounded-full" />
+                        <img src={artist?.user_avatar !== null ? `${public_server}/users/${artist?.user_avatar}` : NotLogin} alt="" className="object-cover h-24 w-24 rounded-full" />
                         <div className="">
                             <p className="text-slate-400 text-sm">Nghệ sĩ</p>
                             <p className="text-white text-base font-bold">{artist?.user_name}</p>

@@ -1,18 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Sidebar, Navbar, Header, Musicbar, Carousel, NewSong, Category, Playlist, TopOneHundred, ZingChart, UserProfile, AlbumDetail, SearchResult, ArtistProfile, Artists } from "../../../components";
 import { useStateValue } from "../../../context/StateProvider";
+import { getAllPost } from "../../../helpers/helperAPI";
 
 const Home = () => {
     const [{ playlist }, dispatch] = useStateValue([]);
     const [showPlaylist, setShowPlaylist] = useState(false);
     const [showCarousel, setShowCarousel] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    console.log(currentPage);
+    const [itemsPerPage, setItemsPerPage] = useState(6);
+    const [listPosts, setListPosts] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
         navigate("/newsong", { replace: true });
+        getAllPost(itemsPerPage, currentPage).then((res) => {
+            if (res.data.success) setListPosts(res.data.message);
+        });
     }, []);
     const location = useLocation();
-    console.log(location)
+
     useEffect(() => {
         switch (location.pathname) {
             case "/artists": setShowCarousel(false);
@@ -24,8 +32,20 @@ const Home = () => {
         }
     }, [location.pathname]);
 
+    useEffect(() => {
+        getAllPost(itemsPerPage, currentPage).then((res) => {
+            if (res.data.success) setListPosts([...listPosts, ...res.data.message]);
+        });
+    }, [currentPage]);
+
+    const handleScroll = (e) => {
+        if (location.pathname === "/artists" && e.currentTarget.scrollTop > 1000 * currentPage) {
+            setCurrentPage(currentPage + 1);
+        }
+    }
+
     return (
-        <div className="w-full h-full overflow-x-hidden">
+        <div className="w-full h-full overflow-x-hidden" onScroll={(e) => handleScroll(e)}>
             <Sidebar />
             <div className={`w-full ml-28 lg:ml-[14rem] relative ${playlist?.length > 0 ? "mb-28" : ""}`}>
                 <Header />
@@ -45,7 +65,7 @@ const Home = () => {
                         <Route path="/albumdetail/:albumcode" element={<AlbumDetail />} />
                         <Route path="/searchresult/:keywords" element={<SearchResult />} />
                         <Route path="/artistprofile/:id" element={<ArtistProfile />} />
-                        <Route path="/artists" element={<Artists />} />
+                        <Route path="/artists" element={<Artists listPosts={listPosts} />} />
                     </Routes>
                 </div>
             </div>

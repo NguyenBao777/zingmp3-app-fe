@@ -69,7 +69,7 @@ const Header = () => {
                     onClick={handleShowLoginForm}
                 >
                     <div className="flex items-center justify-center h-10 w-10 rounded-full overflow-hidden cursor-pointer">
-                        <img src={user?.user_avatar ? `${public_server}/users/${user?.user_avatar}` : NotLogin} alt="" className="object-cover w-full h-full" />
+                        <img src={(user && user?.user_avatar) ? `${public_server}/users/${user?.user_avatar}` : NotLogin} alt="" className="object-cover w-full h-full" />
                     </div>
                     <div className="hidden xl:block">
                         <p className="text-white text-xs font-semibold">{user?.user_name || "Đăng nhập"}</p>
