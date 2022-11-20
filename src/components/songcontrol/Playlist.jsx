@@ -93,7 +93,7 @@ const Playlist = () => {
     }
 
     return (
-        <motion.div className="fixed top-0 right-0 bottom-0 z-20 bg-slate-600 shadow-md py-2 transtion-all duration-200 ease-in-out"
+        <motion.div className="fixed top-0 right-0 bottom-0 z-20 bg-slate-600 shadow-md py-2 h-full pb-24 overflow-y-overlay scroll-custom transtion-all duration-200 ease-in-out"
             initial={{ opacity: 0, x: 1000 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 1000 }}
@@ -137,7 +137,7 @@ const Playlist = () => {
                     </div>
                 )}
             </div>
-            <div className="w-full flex flex-col items-center justify-center gap-2 px-1">
+            <div className="pt-6 w-full flex flex-col items-center justify-center gap-2 px-1">
                 {playlist.length > 0 && playlist.map((song, i) => (
                     <PlaylistItem key={i} index={i} song={song} />
                 ))}

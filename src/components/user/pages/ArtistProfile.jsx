@@ -135,8 +135,8 @@ const ArtistProfile = () => {
 
 
             {readMore && (
-                <div className="fixed z-30 bg-black/75 top-0 bottom-0 left-0 right-0 flex items-center justify-center">
-                    <div className="relative w-[350px] bg-gradient-to-b from-primary to-headerColor rounded-md flex flex-col gap-4 p-4 items-center">
+                <div className="fixed z-30 bg-black/75 top-0 bottom-0 left-0 right-0 flex pt-2 justify-center">
+                    <div className="relative w-[350px] h-[80%] bg-gradient-to-b from-primary to-headerColor rounded-md flex flex-col gap-4 p-4 items-center">
                         <span className="absolute top-1 right-1 cursor-pointer" onClick={() => setReadMore(false)}>
                             <IoCloseOutline className="text-2xl text-white" />
                         </span>

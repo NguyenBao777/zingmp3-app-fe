@@ -260,20 +260,10 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                     </div>
                     <div className="w-full hidden lg:flex items-center justify-center gap-4">
 
-                        <div className="cursor-pointer h-8 w-8 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear">
-                            <MdOutlineLocalMovies className="text-2xl text-white" />
-                        </div>
-
-
                         <div className={`${fullScreen ? "shadow-inner shadow-pink-600 text-pink-600" : "text-white"} cursor-pointer h-8 w-8 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear`}
                             onClick={() => setFullScreen(!fullScreen)}
                         >
                             <TbMicrophone2 className="text-2xl" />
-                        </div>
-
-
-                        <div className="cursor-pointer h-8 w-8 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear">
-                            <TbPictureInPicture className="text-2xl text-white" />
                         </div>
 
                         <div className="flex items-center justify-center gap-2">
@@ -340,10 +330,18 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
                                     onChange={(e) => handleVolumeChange(e)}
                                 />
                             </div>
-                            <div className={`${showPlaylist ? "bg-gradient-to-b from-primary to-headerColor shadow-md" : "bg-white/25"} cursor-pointer h-8 w-8 flex items-center justify-center rounded-md hover:bg-white/50 transition-all duration-75 ease-linear`}
-                                onClick={() => setShowPlaylist(!showPlaylist)}
-                            >
-                                <BsMusicNoteList className="text-2xl text-white" />
+                            <div className="flex items-center justify-center gap-6">
+
+                                <div className={`${fullScreen ? "shadow-inner shadow-pink-600 text-pink-600" : "text-white"} cursor-pointer h-8 w-8 flex items-center justify-center rounded-full hover:bg-white/25 transition-all duration-75 ease-linear`}
+                                    onClick={() => setFullScreen(!fullScreen)}
+                                >
+                                    <TbMicrophone2 className="text-2xl" />
+                                </div>
+                                <div className={`${showPlaylist ? "bg-gradient-to-b from-primary to-headerColor shadow-md" : "bg-white/25"} cursor-pointer h-8 w-8 flex items-center justify-center rounded-md hover:bg-white/50 transition-all duration-75 ease-linear`}
+                                    onClick={() => setShowPlaylist(!showPlaylist)}
+                                >
+                                    <BsMusicNoteList className="text-2xl text-white" />
+                                </div>
                             </div>
                         </motion.div>
                     )}

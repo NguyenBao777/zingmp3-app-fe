@@ -1,16 +1,28 @@
 import { useState, useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Sidebar, Navbar, Header, Musicbar, Carousel, NewSong, Category, Playlist, TopOneHundred, ZingChart, UserProfile, AlbumDetail, SearchResult, ArtistProfile, Artists } from "../../../components";
 import { useStateValue } from "../../../context/StateProvider";
 
 const Home = () => {
     const [{ playlist }, dispatch] = useStateValue([]);
     const [showPlaylist, setShowPlaylist] = useState(false);
+    const [showCarousel, setShowCarousel] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {
         navigate("/newsong", { replace: true });
     }, []);
+    const location = useLocation();
+    console.log(location)
+    useEffect(() => {
+        switch (location.pathname) {
+            case "/artists": setShowCarousel(false);
+                break;
+            case "/userprofile": setShowCarousel(false);
+                break;
 
+            default: setShowCarousel(true);
+        }
+    }, [location.pathname]);
 
     return (
         <div className="w-full h-full overflow-x-hidden">
@@ -18,8 +30,12 @@ const Home = () => {
             <div className={`w-full ml-28 lg:ml-[14rem] relative ${playlist?.length > 0 ? "mb-28" : ""}`}>
                 <Header />
                 <div className="mt-14 mr-28 lg:mr-[14rem] flex flex-col items-center px-4 pb-2">
-                    <Navbar />
-                    <Carousel />
+                    {showCarousel && (
+                        <>
+                            <Navbar />
+                            <Carousel />
+                        </>
+                    )}
                     <Routes>
                         <Route path="/newsong" element={<NewSong />} />
                         <Route path="/zingchart" element={<ZingChart />} />

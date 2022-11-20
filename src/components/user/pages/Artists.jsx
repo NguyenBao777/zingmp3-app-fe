@@ -69,7 +69,7 @@ const PostItem = ({ data }) => {
 
             {readMore && (
                 <div className="fixed z-30 bg-black/75 top-0 bottom-0 left-0 right-0 flex pt-3 justify-center">
-                    <div className="relative w-[350px] md:w-[1000px] bg-gradient-to-b from-primary to-headerColor rounded-md flex flex-col gap-4 p-4">
+                    <div className="relative w-[350px] md:w-[1000px] h-[80%] bg-gradient-to-b from-primary to-headerColor rounded-md flex flex-col gap-4 p-4">
                         <span className="absolute top-1 right-1 cursor-pointer" onClick={() => setReadMore(false)}>
                             <IoCloseOutline className="text-2xl text-white" />
                         </span>
@@ -88,7 +88,7 @@ const PostItem = ({ data }) => {
                         <div className="flex flex-wrap justify-center">
                             {data?.post_image && (
                                 <div className="w-full md:w-1/2 p-2">
-                                    <img src={`${public_server}/posts/${data?.post_image}`} alt="" className="object-cover w-full max-h-[200px] md:max-h-[400px] rounded-md" />
+                                    <img src={`${public_server}/posts/${data?.post_image}`} alt="" className="object-cover w-full max-h-[200px] md:max-h-[350px] rounded-md" />
                                 </div>
                             )}
                             <div className="w-full md:w-1/2">

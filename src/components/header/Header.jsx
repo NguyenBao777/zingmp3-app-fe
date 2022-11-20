@@ -59,7 +59,7 @@ const Header = () => {
     return (
 
         <>
-            <header className="w-[calc(100%-6.8rem)] md:w-[calc(100%-7.4rem)] lg:w-[calc(100%-13.4rem)] flex items-center justify-between px-2 py-1 gap-4 bg-headerColor fixed top-0 right-0 drop-shadow-md z-20">
+            <header className="w-[calc(100%-7.2rem)] md:w-[calc(100%-7.7rem)] lg:w-[calc(100%-12.9rem)] flex items-center justify-between px-2 py-1 gap-4 bg-headerColor fixed top-0 right-0 drop-shadow-md z-20">
                 <div className="hidden md:flex items-center justify-center gap-4">
                     <AiOutlineArrowLeft className="text-3xl cursor-pointer text-white/75 hover:text-white transition-all duration-150 ease-linear" />
                     <AiOutlineArrowRight className="text-3xl cursor-pointer text-white/75 hover:text-white transition-all duration-150 ease-linear" />
@@ -69,7 +69,7 @@ const Header = () => {
                     onClick={handleShowLoginForm}
                 >
                     <div className="flex items-center justify-center h-10 w-10 rounded-full overflow-hidden cursor-pointer">
-                        <img src={user && user?.user_avatar ? `${public_server}/users/${user?.user_avatar}` : NotLogin} alt="" className="object-cover w-full h-full" />
+                        <img src={user?.user_avatar ? `${public_server}/users/${user?.user_avatar}` : NotLogin} alt="" className="object-cover w-full h-full" />
                     </div>
                     <div className="hidden xl:block">
                         <p className="text-white text-xs font-semibold">{user?.user_name || "Đăng nhập"}</p>
@@ -187,7 +187,7 @@ const Header = () => {
                 <div className="fixed top-0 left-0 bottom-0 right-0 z-40 flex items-center justify-center bg-black/75">
                     {alert !== "" && (<Alert alert={alert} />)}
 
-                    <span className="absolute top-14 right-2 w-6 h-6 cursor-pointer flex items-center justify-center p-2 rounded-full bg-red-600 hover:bg-red-800 transtion-all duration-150 ease-in-out"
+                    <span className="absolute top-2 right-2 w-6 h-6 cursor-pointer flex items-center justify-center p-2 rounded-full bg-red-600 hover:bg-red-800 transtion-all duration-150 ease-in-out"
                         onClick={() => setShowLoginForm(false)}
                     >
                         <FaTimes className="text-xl text-white" />
