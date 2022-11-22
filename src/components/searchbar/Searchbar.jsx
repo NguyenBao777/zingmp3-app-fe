@@ -68,7 +68,7 @@ const Searchbar = () => {
                         <BsSearch className="text-base text-white" />
                         <p className="text-white text-base">{keySearch}</p>
                     </Link>
-                    <div className="flex flex-col gap-4 max-h-[300px] overflow-y-auto scroll-custom">
+                    <div className="flex flex-col gap-4 max-h-[300px] overflow-x-hidden overflow-y-auto scroll-custom">
                         {searchSongResult.length > 0 && searchSongResult.map((song, i) => (
                             <div key={i} className="w-full flex items-center gap-4 cursor-pointer hover:bg-white/25 rounded-md p-2"
                                 onClick={() => handleSetPlaylist(song)}
