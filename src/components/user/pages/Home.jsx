@@ -9,7 +9,6 @@ const Home = () => {
     const [showPlaylist, setShowPlaylist] = useState(false);
     const [showCarousel, setShowCarousel] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
-    console.log(currentPage);
     const [itemsPerPage, setItemsPerPage] = useState(6);
     const [listPosts, setListPosts] = useState([]);
     const navigate = useNavigate();

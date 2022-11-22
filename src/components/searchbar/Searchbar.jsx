@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import { public_server, searchSongs } from "../../helpers/helperAPI";
-import { SongItem } from "../../components";
 import { useStateValue } from "../../context/StateProvider";
 import IconIsPlay from "../../assets/images/icons/icon-playing.gif"
 import { actionType } from "../../context/reducer";
@@ -20,10 +19,7 @@ const Searchbar = () => {
             });
         } else {
             setSearchSongResult([]);
-            setShowSearchBox(false);
         }
-
-        // if (searchSongResult.length === 0) setShowSearchBox(false);
     }, [keySearch]);
 
 
@@ -51,19 +47,22 @@ const Searchbar = () => {
 
 
     return (
-        <div className="w-full rounded-full relative">
+        <div className="w-full rounded-full relative"
+            onMouseMove={() => setShowSearchBox(true)}
+        >
             <div className={`${showSearchBox ? "bg-primary" : "bg-white/25"} p-2 rounded-full absolute -top-5 w-full z-20 focus-within:bg-primary transition-all duration-75 ease-in-out`}>
                 <div className="flex items-center gap-2">
                     <BsSearch className="text-2xl text-white" />
                     <input type="text" value={keySearch} placeholder="Tìm kiếm bài hát, nghệ sĩ, lời bài hát..." className="focus-within:bg-primary bg-transparent border-none outline-none transition-all duration-75 ease-in-out text-white placeholder:text-white w-full"
                         onChange={(e) => setKeySearch(e.target.value)}
                         onFocus={() => setShowSearchBox(true)}
-                    // onBlur={() => setShowSearchBox(false)}
                     />
                 </div>
             </div>
             {showSearchBox && searchSongResult.length > 0 && (
-                <div className="bg-gradient-to-b from-primary to-headerColor rounded-md w-full absolute -top-1 left-0 z-10 pt-10 px-2 py-2 overflow-hidden">
+                <div className="bg-gradient-to-b from-primary to-headerColor rounded-md w-full absolute -top-1 left-0 z-10 pt-10 px-2 py-2 overflow-hidden"
+                    onMouseLeave={() => setShowSearchBox(false)}
+                >
                     <h4 className="text-white mb-2">Kết quả tìm kiếm</h4>
                     <Link to={`/searchresult/${keySearch}`} className="p-2 flex items-center gap-4 w-full hover:bg-white/25 transition-all duration-150 ease-in-out rounded-md" onClick={() => setTimeout(() => { setShowSearchBox(false) }, 500)}>
                         <BsSearch className="text-base text-white" />

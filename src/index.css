@@ -84,33 +84,6 @@ input[type="range"]::-webkit-progress-value {
 	border-radius: 26px;
 }
 
-/* custom carousel */
-/* .item-carousel {
-	position: absolute;
-	top: 0;
-	left: 0;
-	opacity: 0.5;
-	transform: scale(0.5);
-	transition: all 2.5s ease-in-out;
-	z-index: 0;
-}
-
-.item-carousel.active {
-	left: 45px;
-	opacity: 1;
-	transform: scale(1);
-	transition: all 2.5s ease-in-out;
-	z-index: 2;
-}
-
-.item-carousel.next {
-	left: 25px;
-	opacity: 0.75;
-	transform: scale(0.75);
-	transition: all 2.5s ease-in-out;
-	z-index: 1;
-} */
-
 .masonry-grid {
 	display: -webkit-box; /* Not needed if autoprefixing */
 	display: -ms-flexbox; /* Not needed if autoprefixing */

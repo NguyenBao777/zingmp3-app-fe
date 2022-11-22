@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { public_server, searchAlbums, searchArtist, searchSongs } from '../../../helpers/helperAPI';
 import { SongItem } from "../../../components";
 import NotLogin from "../../../assets/images/icons/NotLogin.png";
+import NoResult from "../../../assets/images/bg-images/NoResult.png";
 const SearchResult = () => {
     const [listSongs, setListSongs] = useState([]);
     const [listAlbums, setListAlbums] = useState([]);
@@ -23,39 +24,57 @@ const SearchResult = () => {
 
     return (
         <div className="w-full flex flex-col justify-center gap-4">
-            <h4 className="text-white font-bold text-lg uppercase">Nghệ sĩ</h4>
-            <div className="w-full flex flex-wrap items-center gap-4">
-                {listArtists.length > 0 && listArtists.map((artist, i) => (
-                    <Link to={`/artistprofile/${artist?.id}`} key={i} className="w-full md:w-[30%] bg-white/25 hover:bg-white/50 transition-all duration-150 ease-in-out rounded-md flex flex-wrap gap-4 p-2">
-                        <img src={artist?.user_avatar !== null ? `${public_server}/users/${artist?.user_avatar}` : NotLogin} alt="" className="object-cover h-24 w-24 rounded-full" />
-                        <div className="">
-                            <p className="text-slate-400 text-sm">Nghệ sĩ</p>
-                            <p className="text-white text-base font-bold">{artist?.user_name}</p>
-                            <p className="text-white text-base italic"> Ngày sinh: <span className="text-slate-400">{artist?.user_birthday}</span></p>
-                        </div>
-                    </Link>
-                ))}
-            </div>
-            <h4 className="text-white font-bold text-lg uppercase">Albums</h4>
-            <div className="flex flex-wrap items-center gap-4">
-                {listAlbums.length > 0 && listAlbums.map((album, i) => (
-                    <Link key={i} to={`/albumdetail/${album?.album_code}`} className="bg-white/25 hover:bg-white/50 transition-all duration-150 ease-in-out rounded-md flex gap-4 p-2 md:w-[30%] w-full">
-                        <img src={`${public_server}/albums/${album?.album_cover}`} alt="" className="object-cover h-24 w-24 rounded-md" />
-                        <div className="">
-                            <p className="text-slate-400 text-sm">Album</p>
-                            <p className="text-white text-base font-bold">{album?.album_name}</p>
-                            <p className="text-slate-400 text-base">{album?.album_desc.length > 40 ? album?.album_desc.slice(0, 37) + "..." : album?.album_desc}</p>
-                        </div>
-                    </Link>
+            {listArtists.length === 0 && listAlbums.length === 0 && listSongs.length === 0 && (
+                <div className="flex items-center justify-center">
+                    <img src={NoResult} alt="" className="object-cover w-full h-full rounded-md" />
+                </div>
 
-                ))}
-            </div>
-            <h4 className="text-white font-bold text-lg uppercase">Bài hát</h4>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-                {listSongs.length > 0 && listSongs.map((song, i) => (
-                    <SongItem song={song} index={i} key={i} />
-                ))}
-            </div>
+            )}
+            {listArtists.length > 0 && (
+                <>
+                    <h4 className="text-white font-bold text-lg uppercase">Nghệ sĩ</h4>
+                    <div className="w-full flex flex-wrap items-center gap-4">
+                        {listArtists.map((artist, i) => (
+                            <Link to={`/artistprofile/${artist?.id}`} key={i} className="w-full md:w-[30%] bg-white/25 hover:bg-white/50 transition-all duration-150 ease-in-out rounded-md flex flex-wrap gap-4 p-2">
+                                <img src={artist?.user_avatar !== null ? `${public_server}/users/${artist?.user_avatar}` : NotLogin} alt="" className="object-cover h-24 w-24 rounded-full" />
+                                <div className="">
+                                    <p className="text-slate-400 text-sm">Nghệ sĩ</p>
+                                    <p className="text-white text-base font-bold">{artist?.user_name}</p>
+                                    <p className="text-white text-base italic"> Ngày sinh: <span className="text-slate-400">{artist?.user_birthday}</span></p>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </>
+            )}
+            {listAlbums.length > 0 && (
+                <>
+                    <h4 className="text-white font-bold text-lg uppercase">Albums</h4>
+                    <div className="flex flex-wrap items-center gap-4">
+                        {listAlbums.map((album, i) => (
+                            <Link key={i} to={`/albumdetail/${album?.album_code}`} className="bg-white/25 hover:bg-white/50 transition-all duration-150 ease-in-out rounded-md flex gap-4 p-2 md:w-[30%] w-full">
+                                <img src={`${public_server}/albums/${album?.album_cover}`} alt="" className="object-cover h-24 w-24 rounded-md" />
+                                <div className="">
+                                    <p className="text-slate-400 text-sm">Album</p>
+                                    <p className="text-white text-base font-bold">{album?.album_name}</p>
+                                    <p className="text-slate-400 text-base">{album?.album_desc.length > 40 ? album?.album_desc.slice(0, 37) + "..." : album?.album_desc}</p>
+                                </div>
+                            </Link>
+
+                        ))}
+                    </div>
+                </>
+            )}
+            {listSongs.length > 0 && (
+                <>
+                    <h4 className="text-white font-bold text-lg uppercase">Bài hát</h4>
+                    <div className="flex flex-wrap items-center justify-center gap-4">
+                        {listSongs.map((song, i) => (
+                            <SongItem song={song} index={i} key={i} />
+                        ))}
+                    </div>
+                </>
+            )}
         </div>
     )
 }
