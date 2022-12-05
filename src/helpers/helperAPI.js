@@ -1,6 +1,6 @@
 import axios from "axios";
 // const baseUrl = "http://localhost:4000";
-const baseUrl = "zingmp3-app-be-deploy-mwsmj8xbk-nguyenbao777.vercel.app";
+const baseUrl = "zingmp3-app-be-deploy-nguyenbao777.vercel.app";
 export const public_server = `${baseUrl}/public`;
 /********************* user API: ***************************/
 export const userLogin = async (formData) => {
