@@ -98,6 +98,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
     }
 
     const prev = () => {
+        if (playlist.length <= 0) return;
         if (isRandom) {
             const number = numberRandom();
             setCurrentIndex(number);
@@ -111,6 +112,7 @@ const Musicbar = ({ showPlaylist, setShowPlaylist }) => {
     };
 
     const next = () => {
+        if (playlist.length <= 0) return;
         if (isRandom) {
             const number = numberRandom();
             setCurrentIndex(number);
